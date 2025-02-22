@@ -70,4 +70,76 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
     access_token = auth.create_access_token(
         data={"sub": user.username}, expires_delta=access_token_expires
     )
-    return {"access_token": access_token, "token_type": "bearer"} 
+    return {"access_token": access_token, "token_type": "bearer"}
+
+@app.post("/assessment/profile", response_model=schemas.LearningProfile)
+def create_learning_profile(
+    profile: schemas.LearningProfileCreate,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(auth.get_current_user)
+):
+    # Check if profile already exists
+    existing_profile = db.query(models.LearningProfile).filter(
+        models.LearningProfile.user_id == current_user.id
+    ).first()
+    
+    if existing_profile:
+        raise HTTPException(status_code=400, detail="Learning profile already exists")
+    
+    db_profile = models.LearningProfile(
+        **profile.dict(),
+        user_id=current_user.id
+    )
+    db.add(db_profile)
+    db.commit()
+    db.refresh(db_profile)
+    return db_profile
+
+@app.get("/assessment/profile", response_model=schemas.LearningProfile)
+def get_learning_profile(
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(auth.get_current_user)
+):
+    profile = db.query(models.LearningProfile).filter(
+        models.LearningProfile.user_id == current_user.id
+    ).first()
+    
+    if not profile:
+        raise HTTPException(status_code=404, detail="Learning profile not found")
+    return profile
+
+@app.put("/assessment/profile", response_model=schemas.LearningProfile)
+def update_learning_profile(
+    profile_update: schemas.LearningProfileCreate,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(auth.get_current_user)
+):
+    existing_profile = db.query(models.LearningProfile).filter(
+        models.LearningProfile.user_id == current_user.id
+    ).first()
+    
+    if not existing_profile:
+        raise HTTPException(status_code=404, detail="Learning profile not found")
+    
+    for key, value in profile_update.dict(exclude_unset=True).items():
+        setattr(existing_profile, key, value)
+    
+    db.commit()
+    db.refresh(existing_profile)
+    return existing_profile
+
+@app.delete("/assessment/profile", response_model=dict)
+def delete_learning_profile(
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(auth.get_current_user)
+):
+    profile = db.query(models.LearningProfile).filter(
+        models.LearningProfile.user_id == current_user.id
+    ).first()
+    
+    if not profile:
+        raise HTTPException(status_code=404, detail="Learning profile not found")
+    
+    db.delete(profile)
+    db.commit()
+    return {"message": "Learning profile deleted successfully"} 
