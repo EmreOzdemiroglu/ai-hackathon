@@ -22,8 +22,8 @@ export default function SignupPage() {
     try {
       await signup({ username, email, password });
       toast.success('Registration successful!');
-      // Redirect to blank page after successful registration
-      router.push('/blank');
+      // Redirect to assessment page after successful registration
+      router.push('/assesment');
     } catch (error: any) {
       toast.error(error.response?.data?.detail || 'Registration failed. Please try again.');
     } finally {
