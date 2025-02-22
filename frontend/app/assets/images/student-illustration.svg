@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Desk -->
+  <rect x="50" y="200" width="300" height="20" fill="#9F7AEA"/>
+  <rect x="60" y="220" width="280" height="60" fill="#805AD5"/>
+  
+  <!-- Book -->
+  <rect x="150" y="160" width="100" height="80" fill="#E9D8FD"/>
+  <rect x="150" y="160" width="50" height="80" fill="#D6BCFA"/>
+  <path d="M150 160 L250 160 L250 240 L150 240 Z" stroke="#805AD5" stroke-width="2"/>
+  
+  <!-- Laptop -->
+  <rect x="120" y="180" width="80" height="60" rx="5" fill="#B794F4"/>
+  <rect x="125" y="185" width="70" height="45" rx="3" fill="#553C9A"/>
+  
+  <!-- Student figure (simplified) -->
+  <circle cx="200" cy="120" r="25" fill="#9F7AEA"/> <!-- head -->
+  <rect x="185" y="145" width="30" height="40" rx="10" fill="#805AD5"/> <!-- body -->
+  
+  <!-- Decorative elements -->
+  <circle cx="100" cy="80" r="15" fill="#E9D8FD" opacity="0.5"/>
+  <circle cx="300" cy="100" r="20" fill="#D6BCFA" opacity="0.5"/>
+  <circle cx="250" cy="60" r="10" fill="#B794F4" opacity="0.5"/>
+</svg> 
