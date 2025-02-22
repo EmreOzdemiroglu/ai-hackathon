@@ -14,7 +14,7 @@ export const createLearningProfile = async (profile: LearningProfile): Promise<L
   }
 
   const response = await fetch(`${API_BASE_URL}/assessment/profile`, {
-    method: 'POST',
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
@@ -23,8 +23,8 @@ export const createLearningProfile = async (profile: LearningProfile): Promise<L
   });
 
   if (!response.ok) {
-    const error = await response.json().catch(() => ({ detail: 'Failed to create learning profile' }));
-    throw new Error(error.detail || 'Failed to create learning profile');
+    const error = await response.json().catch(() => ({ detail: 'Failed to update learning profile' }));
+    throw new Error(error.detail || 'Failed to update learning profile');
   }
 
   return response.json();
@@ -43,9 +43,6 @@ export const getLearningProfile = async (): Promise<LearningProfile> => {
   });
 
   if (!response.ok) {
-    if (response.status === 404) {
-      throw new Error('Learning profile not found');
-    }
     const error = await response.json().catch(() => ({ detail: 'Failed to fetch learning profile' }));
     throw new Error(error.detail || 'Failed to fetch learning profile');
   }

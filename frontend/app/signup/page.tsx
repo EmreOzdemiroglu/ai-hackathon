@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import toast, { Toaster } from 'react-hot-toast';
-import dictionaryImage from '../assets/images/Dictionary-pana.png';
+import dictionaryImage from '../assets/images/Welcome-amico.png';
 import { signup } from '../utils/auth';
 
 export default function SignupPage() {
@@ -20,10 +20,11 @@ export default function SignupPage() {
     setIsLoading(true);
 
     try {
-      await signup({ username, email, password });
+      const response = await signup({ username, email, password });
+      // Token is already stored in localStorage by the login function
       toast.success('Registration successful!');
       // Redirect to assessment page after successful registration
-      router.push('/assesment');
+      router.push('/assessment');
     } catch (error: any) {
       toast.error(error.response?.data?.detail || 'Registration failed. Please try again.');
     } finally {

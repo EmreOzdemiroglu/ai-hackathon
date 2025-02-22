@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 import toast, { Toaster } from 'react-hot-toast';
 import dictionaryImage from '../assets/images/Dictionary-pana.png';
 import { login } from '../utils/auth';
-import { getLearningProfile } from '../services/api';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -20,24 +19,10 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      // First login
       await login({ username, password });
       toast.success('Login successful!');
-
-      // Check if user has already completed assessment
-      try {
-        const profile = await getLearningProfile();
-        if (profile) {
-          // User has already completed assessment, redirect to dashboard
-          router.push('/dashboard');
-        } else {
-          // User hasn't completed assessment yet
-          router.push('/assessment');
-        }
-      } catch (error) {
-        // If we get a 404, it means no profile exists
-        router.push('/assessment');
-      }
+      // Redirect to blank page after successful login
+      router.push('/blank');
     } catch (error: any) {
       toast.error(error.response?.data?.detail || 'Login failed. Please try again.');
     } finally {

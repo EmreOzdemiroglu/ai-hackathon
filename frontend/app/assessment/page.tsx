@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast';
-import { createLearningProfile, getLearningProfile } from '../services/api';
+import { createLearningProfile } from '../services/api';
 
 interface Question {
   id: string;
@@ -154,36 +154,6 @@ export default function Assessment() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [questions, setQuestions] = useState<Question[]>(primarySchoolQuestions);
-
-  // Check if user has already completed assessment
-  useEffect(() => {
-    const checkExistingAssessment = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        if (!token) {
-          router.push('/login');
-          return;
-        }
-
-        // Try to get existing profile
-        const profile = await getLearningProfile();
-        if (profile) {
-          // User has already completed assessment, redirect to dashboard
-          toast.error('You have already completed the assessment');
-          router.push('/dashboard');
-        }
-      } catch (error) {
-        // If we get a 404, it means no profile exists, which is what we want
-        // Any other error should redirect to login
-        if (error instanceof Error && !error.message.includes('not found')) {
-          toast.error('Please log in to take the assessment');
-          router.push('/login');
-        }
-      }
-    };
-
-    checkExistingAssessment();
-  }, [router]);
 
   useEffect(() => {
     if (age) {
