@@ -1,5 +1,6 @@
 from pydantic import BaseModel, EmailStr
-from typing import Optional
+from typing import Optional, List
+from datetime import datetime
 
 class UserBase(BaseModel):
     username: str
@@ -36,10 +37,28 @@ class LearningProfile(LearningProfileBase):
     user_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
+
+class ChatMessageBase(BaseModel):
+    content: str
+
+class ChatMessageCreate(ChatMessageBase):
+    pass
+
+class ChatMessageResponse(ChatMessageBase):
+    id: int
+    user_id: int
+    response: str
+    planning_analysis: str
+    final_analysis: str
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
 
 class UserWithProfile(User):
     learning_profile: Optional[LearningProfile] = None
+    chat_messages: List[ChatMessageResponse] = []
 
     class Config:
-        orm_mode = True 
+        from_attributes = True 

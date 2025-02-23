@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 import models
 import schemas
 import auth
+import chatbot
 from database import engine, get_db
 
 # Create the database tables
@@ -142,4 +143,44 @@ def delete_learning_profile(
     
     db.delete(profile)
     db.commit()
-    return {"message": "Learning profile deleted successfully"} 
+    return {"message": "Learning profile deleted successfully"}
+
+@app.post("/chat", response_model=schemas.ChatMessageResponse)
+async def create_chat_message(
+    message: schemas.ChatMessageCreate,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(auth.get_current_user)
+):
+    """
+    Process a chat message through the Planning and Analysis agents
+    and store the results in the database
+    """
+    # Get response from chatbot
+    planning_analysis, final_analysis, response = await chatbot.get_chat_response(message.content)
+    
+    # Create chat message
+    db_message = models.ChatMessage(
+        user_id=current_user.id,
+        content=message.content,
+        response=response,
+        planning_analysis=planning_analysis,
+        final_analysis=final_analysis
+    )
+    
+    # Save to database
+    db.add(db_message)
+    db.commit()
+    db.refresh(db_message)
+    
+    return db_message
+
+@app.get("/chat/history", response_model=list[schemas.ChatMessageResponse])
+async def get_chat_history(
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(auth.get_current_user)
+):
+    """Get chat history for the current user"""
+    messages = db.query(models.ChatMessage).filter(
+        models.ChatMessage.user_id == current_user.id
+    ).order_by(models.ChatMessage.created_at.desc()).all()
+    return messages 
