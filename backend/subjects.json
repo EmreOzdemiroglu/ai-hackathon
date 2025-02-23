@@ -1,0 +1,2825 @@
+{
+    "subjects": [
+      {
+        "id": 1,
+        "name": "Spatial Relationships",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Understanding spatial concepts and relationships."
+      },
+      {
+        "id": 2,
+        "name": "Natural Numbers: Getting to Know Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Introduction to natural numbers and their properties."
+      },
+      {
+        "id": 3,
+        "name": "Counting Objects",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Learning to count and enumerate objects."
+      },
+      {
+        "id": 4,
+        "name": "Addition with Natural Numbers: Addition and Subtraction Operations",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Basic addition operations with natural numbers."
+      },
+      {
+        "id": 5,
+        "name": "Place Value: Addition and Subtraction Operations",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Understanding place value in number systems."
+      },
+      {
+        "id": 6,
+        "name": "Subtraction with Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Basic subtraction operations with natural numbers."
+      },
+      {
+        "id": 7,
+        "name": "Addition and Subtraction Problems: Addition and Subtraction Operations",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Solving word problems involving addition and subtraction."
+      },
+      {
+        "id": 8,
+        "name": "Addition and Subtraction with Numbers Up to 5 and 10",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Practicing addition and subtraction within 5 and 10."
+      },
+      {
+        "id": 9,
+        "name": "Our Money: Shopping Time",
+        "category": "Mathematics",
+        "subcategory": "Applied Mathematics",
+        "description": "Understanding money and making calculations in a shopping context."
+      },
+      {
+        "id": 10,
+        "name": "Addition with Natural Numbers: Shopping Time",
+        "category": "Mathematics",
+        "subcategory": "Applied Mathematics",
+        "description": "Using addition in shopping-related problems."
+      },
+      {
+        "id": 11,
+        "name": "Subtraction with Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Applied Mathematics",
+        "description": "Using subtraction in shopping-related problems."
+      },
+      {
+        "id": 12,
+        "name": "Fractions: Introduction to Geometry",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Introduction to fractions."
+      },
+      {
+        "id": 13,
+        "name": "Measuring Time: Introduction to Geometry",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Learning to measure and understand time."
+      },
+      {
+        "id": 14,
+        "name": "Geometric Solids and Shapes",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Identifying and understanding basic geometric shapes."
+      },
+      {
+        "id": 15,
+        "name": "Data Collection and Evaluation: Measuring Length and Liquid",
+        "category": "Mathematics",
+        "subcategory": "Statistics",
+        "description": "Collecting and evaluating data related to length and liquid measurements."
+      },
+      {
+        "id": 16,
+        "name": "Measuring Length",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Learning to measure length using different units."
+      },
+      {
+        "id": 17,
+        "name": "Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Further exploration of natural numbers."
+      },
+      {
+        "id": 18,
+        "name": "Place Value",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Reinforcing understanding of place value."
+      },
+      {
+        "id": 19,
+        "name": "Skip Counting",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Learning to count by multiples."
+      },
+      {
+        "id": 20,
+        "name": "Tens and Ones",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Understanding numbers in terms of tens and ones."
+      },
+      {
+        "id": 21,
+        "name": "Addition with Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Advanced addition with natural numbers."
+      },
+      {
+        "id": 22,
+        "name": "Addition with Two-Digit Numbers",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Addition problems involving two-digit numbers."
+      },
+      {
+        "id": 23,
+        "name": "Subtraction with Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Advanced subtraction with natural numbers."
+      },
+      {
+        "id": 24,
+        "name": "Addition with Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Practice addition with natural numbers."
+      },
+      {
+        "id": 25,
+        "name": "Subtraction with Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Practice subtraction with natural numbers."
+      },
+      {
+        "id": 26,
+        "name": "Liquid Measurement",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Learning to measure liquid volumes."
+      },
+      {
+        "id": 27,
+        "name": "Geometric Solids and Shapes",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "More in-depth study of geometric shapes."
+      },
+      {
+        "id": 28,
+        "name": "Spatial Relationships",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Further exploration of spatial relationships."
+      },
+      {
+        "id": 29,
+        "name": "Multiplication with Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Introduction to multiplication."
+      },
+      {
+        "id": 30,
+        "name": "Division with Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Introduction to division."
+      },
+      {
+        "id": 31,
+        "name": "Fractions",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Further exploration of fractions."
+      },
+      {
+        "id": 32,
+        "name": "Measuring Time",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Advanced concepts in measuring time."
+      },
+      {
+        "id": 33,
+        "name": "Our Money",
+        "category": "Mathematics",
+        "subcategory": "Applied Mathematics",
+        "description": "More complex calculations with money."
+      },
+      {
+        "id": 34,
+        "name": "Data Collection and Evaluation",
+        "category": "Mathematics",
+        "subcategory": "Statistics",
+        "description": "Advanced data collection and evaluation techniques."
+      },
+      {
+        "id": 35,
+        "name": "Measuring Length",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Advanced measurement of length."
+      },
+      {
+        "id": 36,
+        "name": "Length Problems",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Solving problems involving length."
+      },
+      {
+        "id": 37,
+        "name": "Weighing",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Learning to weigh objects."
+      },
+      {
+        "id": 38,
+        "name": "Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Advanced concepts of natural numbers."
+      },
+      {
+        "id": 39,
+        "name": "Comparing Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Learning to compare and order numbers."
+      },
+      {
+        "id": 40,
+        "name": "Addition with Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "More complex addition problems."
+      },
+      {
+        "id": 41,
+        "name": "Subtraction with Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "More complex subtraction problems."
+      },
+      {
+        "id": 42,
+        "name": "Addition with Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Further practice in addition."
+      },
+      {
+        "id": 43,
+        "name": "Subtraction with Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Further practice in subtraction."
+      },
+      {
+        "id": 44,
+        "name": "Data Collection and Evaluation",
+        "category": "Mathematics",
+        "subcategory": "Statistics",
+        "description": "Analyzing and interpreting collected data."
+      },
+      {
+        "id": 45,
+        "name": "Multiplication with Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Developing multiplication skills."
+      },
+      {
+        "id": 46,
+        "name": "Multiplication Problems",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Solving word problems involving multiplication."
+      },
+      {
+        "id": 47,
+        "name": "Division with Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Developing division skills."
+      },
+      {
+        "id": 48,
+        "name": "Division Problems",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Solving word problems involving division."
+      },
+      {
+        "id": 49,
+        "name": "Fractions",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Advanced concepts of fractions."
+      },
+      {
+        "id": 50,
+        "name": "Measuring Time",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "More advanced time measurement techniques."
+      },
+      {
+        "id": 51,
+        "name": "Our Money",
+        "category": "Mathematics",
+        "subcategory": "Applied Mathematics",
+        "description": "Real-world applications of money calculations."
+      },
+      {
+        "id": 52,
+        "name": "Weighing",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Advanced techniques in weighing objects."
+      },
+      {
+        "id": 53,
+        "name": "Geometric Solids and Shapes",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Exploring more complex geometric shapes."
+      },
+      {
+        "id": 54,
+        "name": "Basic Concepts in Geometry",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Foundational concepts of geometry."
+      },
+      {
+        "id": 55,
+        "name": "Spatial Relationships",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Advanced understanding of spatial relationships."
+      },
+      {
+        "id": 56,
+        "name": "Measuring Length",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Precision in measuring length."
+      },
+      {
+        "id": 57,
+        "name": "Measuring Perimeter",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Learning to calculate the perimeter of shapes."
+      },
+      {
+        "id": 58,
+        "name": "Measuring Area",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Learning to calculate the area of shapes."
+      },
+      {
+        "id": 59,
+        "name": "Liquid Measurement",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Advanced liquid measurement skills."
+      },
+      {
+        "id": 60,
+        "name": "Counting Forward by Hundreds and Thousands with Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Counting in larger increments with natural numbers."
+      },
+      {
+        "id": 61,
+        "name": "Periods and Places of Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Understanding place value in larger numbers."
+      },
+      {
+        "id": 62,
+        "name": "Place Value of Digits in a Place",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Identifying the value of digits based on their place."
+      },
+      {
+        "id": 63,
+        "name": "Decomposing Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Breaking down natural numbers into their components."
+      },
+      {
+        "id": 64,
+        "name": "Rounding Natural Numbers to the Nearest Ten or Hundred",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Approximating natural numbers to a specific place value."
+      },
+      {
+        "id": 65,
+        "name": "Ordering Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Arranging natural numbers in ascending or descending order."
+      },
+      {
+        "id": 66,
+        "name": "Number Patterns",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Identifying and extending number patterns."
+      },
+      {
+        "id": 67,
+        "name": "Addition with Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Advanced addition with natural numbers."
+      },
+      {
+        "id": 68,
+        "name": "Subtraction with Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Advanced subtraction with natural numbers."
+      },
+      {
+        "id": 69,
+        "name": "Mental Subtraction",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Performing subtraction calculations mentally."
+      },
+      {
+        "id": 70,
+        "name": "Addition with Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Practicing addition with natural numbers."
+      },
+      {
+        "id": 71,
+        "name": "Subtraction with Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Practicing subtraction with natural numbers."
+      },
+      {
+        "id": 72,
+        "name": "Multiplication with Natural Numbers 1",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Basic multiplication techniques."
+      },
+      {
+        "id": 73,
+        "name": "Multiplication with Natural Numbers 2",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Advanced multiplication techniques."
+      },
+      {
+        "id": 74,
+        "name": "Multiplying Two-Digit Numbers",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Multiplying larger numbers together."
+      },
+      {
+        "id": 75,
+        "name": "Multiplying Using the Area Model",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Using the area model for multiplication."
+      },
+      {
+        "id": 76,
+        "name": "Mental Multiplication",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Performing multiplication calculations mentally."
+      },
+      {
+        "id": 77,
+        "name": "Division with Natural Numbers 1",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Basic division techniques."
+      },
+      {
+        "id": 78,
+        "name": "Division with Natural Numbers 2",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Advanced division techniques."
+      },
+      {
+        "id": 79,
+        "name": "Dividing Two-Digit Numbers",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Dividing larger numbers."
+      },
+      {
+        "id": 80,
+        "name": "Mental Division",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Performing division calculations mentally."
+      },
+      {
+        "id": 81,
+        "name": "The Relationship Between Multiplication and Division",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Understanding the inverse relationship between multiplication and division."
+      },
+      {
+        "id": 82,
+        "name": "Introduction to Fractions",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Basic concepts of fractions."
+      },
+      {
+        "id": 83,
+        "name": "Simple Fractions",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Understanding simple fractions."
+      },
+      {
+        "id": 84,
+        "name": "Improper and Mixed Fractions",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Learning about improper and mixed fractions."
+      },
+      {
+        "id": 85,
+        "name": "Comparing and Ordering Unit Fractions",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Comparing and ordering unit fractions."
+      },
+      {
+        "id": 86,
+        "name": "Equivalent Fractions 1",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Understanding equivalent fractions."
+      },
+      {
+        "id": 87,
+        "name": "Equivalent Fractions 2",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Finding equivalent fractions."
+      },
+      {
+        "id": 88,
+        "name": "Equivalent Fraction Problems",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Solving problems with equivalent fractions."
+      },
+      {
+        "id": 89,
+        "name": "Addition and Subtraction with Fractions with Like Denominators",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Adding and subtracting fractions with common denominators."
+      },
+      {
+        "id": 90,
+        "name": "Mixed and Unit Fractions",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Further exploration of mixed and unit fractions."
+      },
+      {
+        "id": 91,
+        "name": "Problems with Fractions",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Solving word problems involving fractions."
+      },
+      {
+        "id": 92,
+        "name": "Conversions Between Hours - Minutes and Minutes - Seconds",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Converting units of time."
+      },
+      {
+        "id": 93,
+        "name": "Column Graph (Bar Graph)",
+        "category": "Mathematics",
+        "subcategory": "Statistics",
+        "description": "Interpreting and creating column graphs."
+      },
+      {
+        "id": 94,
+        "name": "Different Representations of Data",
+        "category": "Mathematics",
+        "subcategory": "Statistics",
+        "description": "Exploring different ways to represent data."
+      },
+      {
+        "id": 95,
+        "name": "Triangle, Square, and Rectangle",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Properties of triangles, squares, and rectangles."
+      },
+      {
+        "id": 96,
+        "name": "Plane",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Understanding the concept of a plane."
+      },
+      {
+        "id": 97,
+        "name": "Angles",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Types of angles and their properties."
+      },
+      {
+        "id": 98,
+        "name": "Measuring Angles",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Using a protractor to measure angles."
+      },
+      {
+        "id": 99,
+        "name": "Symmetry",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Identifying lines of symmetry in shapes."
+      },
+      {
+        "id": 100,
+        "name": "Measuring Lengths",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Precision in measuring lengths."
+      },
+      {
+        "id": 101,
+        "name": "Perimeters of Squares and Rectangles",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Calculating the perimeter of squares and rectangles."
+      },
+      {
+        "id": 102,
+        "name": "Problems Related to Perimeter",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Solving problems involving perimeter."
+      },
+      {
+        "id": 103,
+        "name": "The Relationship Between Area and Unit Squares",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Understanding the concept of area using unit squares."
+      },
+      {
+        "id": 104,
+        "name": "Area and Perimeter Problems",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Solving combined area and perimeter problems."
+      },
+      {
+        "id": 105,
+        "name": "Area of Squares and Rectangles",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Calculating the area of squares and rectangles."
+      },
+      {
+        "id": 106,
+        "name": "Finding Area by Dividing Shapes into Parts",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Calculating area by dividing complex shapes into simpler ones."
+      },
+      {
+        "id": 107,
+        "name": "Weighing",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Advanced concepts in weighing objects."
+      },
+      {
+        "id": 108,
+        "name": "Problems Related to Weighing",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Solving problems involving weight."
+      },
+      {
+        "id": 109,
+        "name": "Liquid Measurement",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Advanced liquid measurement techniques."
+      },
+      {
+        "id": 110,
+        "name": "Liquid Measurement Problems",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Solving problems involving liquid measurement."
+      },
+      {
+        "id": 111,
+        "name": "Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Review and advanced concepts of natural numbers."
+      },
+      {
+        "id": 112,
+        "name": "Rounding Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Advanced techniques for rounding natural numbers."
+      },
+      {
+        "id": 113,
+        "name": "Place Value",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Reinforcing the concept of place value."
+      },
+      {
+        "id": 114,
+        "name": "Place Value in Whole Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Understanding place value in the context of whole numbers."
+      },
+      {
+        "id": 115,
+        "name": "Number and Shape Patterns",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Identifying and creating number and shape patterns."
+      },
+      {
+        "id": 116,
+        "name": "Addition with Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Advanced addition strategies and problem solving."
+      },
+      {
+        "id": 117,
+        "name": "Subtraction with Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Arithmetic",
+        "description": "Advanced subtraction strategies and problem solving."
+      },
+      {
+        "id": 118,
+        "name": "Exponents",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Introduction to exponents and powers."
+      },
+      {
+        "id": 119,
+        "name": "Expressions with Parentheses Involving Two Operations",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Evaluating expressions with parentheses and multiple operations."
+      },
+      {
+        "id": 120,
+        "name": "Problems with Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Solving real-world problems involving natural numbers."
+      },
+      {
+        "id": 121,
+        "name": "Fractions",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Advanced fraction concepts and operations."
+      },
+      {
+        "id": 122,
+        "name": "Finding Common Denominators",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Techniques for finding common denominators."
+      },
+      {
+        "id": 123,
+        "name": "Mixed Numbers and Improper Fractions",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Converting between mixed numbers and improper fractions."
+      },
+      {
+        "id": 124,
+        "name": "Equivalent Fractions",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Advanced methods for finding equivalent fractions."
+      },
+      {
+        "id": 125,
+        "name": "Ordering Fractions",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Comparing and ordering fractions with different denominators."
+      },
+      {
+        "id": 126,
+        "name": "Addition with Fractions",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Adding fractions with different denominators."
+      },
+      {
+        "id": 127,
+        "name": "Subtraction with Fractions",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Subtracting fractions with different denominators."
+      },
+      {
+        "id": 128,
+        "name": "Fraction Problems",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Solving real-world problems involving fractions."
+      },
+      {
+        "id": 129,
+        "name": "Decimal Representations",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Understanding decimal representations of numbers."
+      },
+      {
+        "id": 130,
+        "name": "Representing Decimals on a Number Line",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Visualizing decimals on a number line."
+      },
+      {
+        "id": 131,
+        "name": "Decimal Place Values",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Understanding place value in decimals."
+      },
+      {
+        "id": 132,
+        "name": "Ordering Decimal Representations",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Comparing and ordering decimals."
+      },
+      {
+        "id": 133,
+        "name": "Addition with Decimal Representations",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Adding decimal numbers."
+      },
+      {
+        "id": 134,
+        "name": "Subtraction with Decimal Representations",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Subtracting decimal numbers."
+      },
+      {
+        "id": 135,
+        "name": "Percentages",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Introduction to percentages and their applications."
+      },
+      {
+        "id": 136,
+        "name": "Line, Line Segment, and Ray",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Understanding basic geometric figures: line, line segment, and ray."
+      },
+      {
+        "id": 137,
+        "name": "Position of a Point and Drawing Line Segments",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Locating points and drawing line segments accurately."
+      },
+      {
+        "id": 138,
+        "name": "Types of Angles",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Classifying angles based on their measure."
+      },
+      {
+        "id": 139,
+        "name": "Measuring Angles",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Using a protractor to measure angles."
+      },
+      {
+        "id": 140,
+        "name": "Polygons",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Identifying and classifying polygons."
+      },
+      {
+        "id": 141,
+        "name": "Types of Triangles",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Classifying triangles based on their sides and angles."
+      },
+      {
+        "id": 142,
+        "name": "Triangles and Quadrilaterals",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Comparing and contrasting triangles and quadrilaterals."
+      },
+      {
+        "id": 143,
+        "name": "Data Handling",
+        "category": "Mathematics",
+        "subcategory": "Statistics",
+        "description": "Collecting and organizing data."
+      },
+      {
+        "id": 144,
+        "name": "Interpreting Data",
+        "category": "Mathematics",
+        "subcategory": "Statistics",
+        "description": "Analyzing and drawing conclusions from data representations."
+      },
+      {
+        "id": 145,
+        "name": "Measuring Lengths",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Using different units to measure lengths accurately."
+      },
+      {
+        "id": 146,
+        "name": "Units of Time Measurement",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Understanding and converting units of time."
+      },
+      {
+        "id": 147,
+        "name": "Area Measurement",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Calculating the area of different shapes."
+      },
+      {
+        "id": 148,
+        "name": "Geometric Solids",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Identifying and describing different geometric solids."
+      },
+      {
+        "id": 149,
+        "name": "Exponents",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Advanced concepts of exponents and powers."
+      },
+      {
+        "id": 150,
+        "name": "Order of Operations",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Applying the order of operations (PEMDAS/BODMAS)."
+      },
+      {
+        "id": 151,
+        "name": "Distributive Property and Common Factor Property",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Using the distributive and common factor properties."
+      },
+      {
+        "id": 152,
+        "name": "Problems with Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Complex problem-solving with natural numbers."
+      },
+      {
+        "id": 153,
+        "name": "Factors and Multiples",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Finding factors and multiples of numbers."
+      },
+      {
+        "id": 154,
+        "name": "Divisibility Rules",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Applying divisibility rules for different numbers."
+      },
+      {
+        "id": 155,
+        "name": "Prime Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Identifying and understanding prime numbers."
+      },
+      {
+        "id": 156,
+        "name": "Common Divisors and Common Multiples of Two Natural Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Finding the greatest common divisor and least common multiple."
+      },
+      {
+        "id": 157,
+        "name": "Positive Integers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Introduction to positive integers."
+      },
+      {
+        "id": 158,
+        "name": "Negative Integers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Introduction to negative integers."
+      },
+      {
+        "id": 159,
+        "name": "Absolute Value and Ordering Integers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Understanding absolute value and ordering integers on a number line."
+      },
+      {
+        "id": 160,
+        "name": "Ordering Fractions",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Ordering fractions with different denominators."
+      },
+      {
+        "id": 161,
+        "name": "Addition with Fractions",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Advanced addition techniques with fractions."
+      },
+      {
+        "id": 162,
+        "name": "Subtraction with Fractions",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Advanced subtraction techniques with fractions."
+      },
+      {
+        "id": 163,
+        "name": "Multiplication with Fractions 1",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Multiplying fractions: basic concepts."
+      },
+      {
+        "id": 164,
+        "name": "Multiplication with Fractions 2",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Multiplying fractions: advanced techniques."
+      },
+      {
+        "id": 165,
+        "name": "Division with Fractions",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Dividing fractions."
+      },
+      {
+        "id": 166,
+        "name": "Fraction Problems",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Solving real-world problems involving fraction operations."
+      },
+      {
+        "id": 167,
+        "name": "Division, Fractions, and Decomposition",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Exploring the relationship between division, fractions, and decomposition."
+      },
+      {
+        "id": 168,
+        "name": "Rounding Numbers with Decimal Notation",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Rounding decimal numbers to a specific place value."
+      },
+      {
+        "id": 169,
+        "name": "Multiplication with Numbers in Decimal Notation",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Multiplying decimal numbers."
+      },
+      {
+        "id": 170,
+        "name": "Division with Numbers in Decimal Notation",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Dividing decimal numbers."
+      },
+      {
+        "id": 171,
+        "name": "Estimating the Result of Operations with Numbers in Decimal Notation",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Estimating sums, differences, products, and quotients of decimals."
+      },
+      {
+        "id": 172,
+        "name": "Solving Problems with Numbers in Decimal Notation",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Solving real-world problems involving decimal numbers."
+      },
+      {
+        "id": 173,
+        "name": "Ratio",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Introduction to ratios and proportions."
+      },
+      {
+        "id": 174,
+        "name": "Ratio Problems",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Solving problems using ratios."
+      },
+      {
+        "id": 175,
+        "name": "Ratios with Units and Unitless Ratios",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Understanding ratios with and without units."
+      },
+      {
+        "id": 176,
+        "name": "Algebraic Expressions",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Introduction to algebraic expressions."
+      },
+      {
+        "id": 177,
+        "name": "Modeling Algebraic Expressions",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Representing algebraic expressions with models and diagrams."
+      },
+      {
+        "id": 178,
+        "name": "Formulating a Research Question, Collecting Data, and Evaluating",
+        "category": "Mathematics",
+        "subcategory": "Statistics",
+        "description": "The scientific method in a mathematical context."
+      },
+      {
+        "id": 179,
+        "name": "Arithmetic Mean (Average) and Range",
+        "category": "Mathematics",
+        "subcategory": "Statistics",
+        "description": "Calculating the mean and range of a data set."
+      },
+      {
+        "id": 180,
+        "name": "Comparing Data for Two Data Sets",
+        "category": "Mathematics",
+        "subcategory": "Statistics",
+        "description": "Comparing and analyzing two different sets of data."
+      },
+      {
+        "id": 181,
+        "name": "Angles",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Advanced properties of angles."
+      },
+      {
+        "id": 182,
+        "name": "Adjacent Complementary, Supplementary, and Vertical Angles",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Relationships between different types of angles."
+      },
+      {
+        "id": 183,
+        "name": "Height and Area of a Parallelogram",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Calculating the area of a parallelogram."
+      },
+      {
+        "id": 184,
+        "name": "Height and Area of a Triangle",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Calculating the area of a triangle."
+      },
+      {
+        "id": 185,
+        "name": "Units of Area Measurement",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Understanding different units for measuring area."
+      },
+      {
+        "id": 186,
+        "name": "Area Problems",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Solving problems involving area calculations."
+      },
+      {
+        "id": 187,
+        "name": "Drawing a Circle and Its Elements",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Constructing a circle and identifying its parts (radius, diameter, circumference)."
+      },
+      {
+        "id": 188,
+        "name": "The Ratio of Circumference to Diameter and π (Pi)",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Understanding the relationship between circumference, diameter, and pi."
+      },
+      {
+        "id": 189,
+        "name": "Volume of a Rectangular Prism",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Calculating the volume of a rectangular prism."
+      },
+      {
+        "id": 190,
+        "name": "Units of Volume Measurement",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Understanding different units for measuring volume."
+      },
+      {
+        "id": 191,
+        "name": "Volume Measurement Problems",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Solving problems involving volume calculations."
+      },
+      {
+        "id": 192,
+        "name": "Liquid Measurement Units",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Units used to measure liquids."
+      },
+      {
+        "id": 193,
+        "name": "Liquid Measurement Problems",
+        "category": "Mathematics",
+        "subcategory": "Measurement",
+        "description": "Solving word problems involving liquids."
+      },
+      {
+        "id": 194,
+        "name": "Addition with Integers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Adding positive and negative integers."
+      },
+      {
+        "id": 195,
+        "name": "Subtraction with Integers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Subtracting positive and negative integers."
+      },
+      {
+        "id": 196,
+        "name": "Problem Solving",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Applying integer operations to solve real-world problems."
+      },
+      {
+        "id": 197,
+        "name": "Multiplication with Integers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Multiplying positive and negative integers."
+      },
+      {
+        "id": 198,
+        "name": "Division with Integers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Dividing positive and negative integers."
+      },
+      {
+        "id": 199,
+        "name": "Exponentiation of Integers",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Raising integers to a power."
+      },
+      {
+        "id": 200,
+        "name": "Introducing Rational Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Understanding rational numbers and their properties."
+      },
+      {
+        "id": 201,
+        "name": "Representing Rational Numbers on a Number Line",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Locating rational numbers on a number line."
+      },
+      {
+        "id": 202,
+        "name": "Decimal Representation of Rational Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Converting rational numbers to decimals."
+      },
+      {
+        "id": 203,
+        "name": "Decimal Representation of Fractions",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Representing fractions as decimals."
+      },
+      {
+        "id": 204,
+        "name": "Comparing Rational Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Comparing and ordering rational numbers."
+      },
+      {
+        "id": 205,
+        "name": "Ordering Rational Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Ordering rational numbers from least to greatest or greatest to least."
+      },
+      {
+        "id": 206,
+        "name": "Operations with Rational Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Performing arithmetic operations with rational numbers."
+      },
+      {
+        "id": 207,
+        "name": "Addition with Rational Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Adding rational numbers."
+      },
+      {
+        "id": 208,
+        "name": "Addition Problems with Fractions",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Solving word problems involving the addition of fractions."
+      },
+      {
+        "id": 209,
+        "name": "Subtraction with Rational Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Subtracting rational numbers."
+      },
+      {
+        "id": 210,
+        "name": "Subtraction Problems with Fractions",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Solving word problems involving the subtraction of fractions."
+      },
+      {
+        "id": 211,
+        "name": "Multiplication with Rational Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Multiplying rational numbers."
+      },
+      {
+        "id": 212,
+        "name": "Multiplication Problems with Fractions",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Solving word problems involving the multiplication of fractions."
+      },
+      {
+        "id": 213,
+        "name": "Division with Rational Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Dividing rational numbers."
+      },
+      {
+        "id": 214,
+        "name": "Division Problems with Fractions",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Solving word problems involving the division of fractions."
+      },
+      {
+        "id": 215,
+        "name": "Multi-Step Operations with Rational Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Solving problems involving multiple operations with rational numbers."
+      },
+      {
+        "id": 216,
+        "name": "Problem Solving",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Applying rational number operations to solve real-world problems."
+      },
+      {
+        "id": 217,
+        "name": "Algebraic Expressions",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Advanced concepts of algebraic expressions."
+      },
+      {
+        "id": 218,
+        "name": "Addition with Algebraic Expressions",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Adding algebraic expressions."
+      },
+      {
+        "id": 219,
+        "name": "Subtraction with Algebraic Expressions",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Subtracting algebraic expressions."
+      },
+      {
+        "id": 220,
+        "name": "Multiplying a Natural Number by an Algebraic Expression",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Applying the distributive property."
+      },
+      {
+        "id": 221,
+        "name": "Combining Like Terms",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Simplifying algebraic expressions."
+      },
+      {
+        "id": 222,
+        "name": "Patterns and Relationships",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Identifying and extending algebraic patterns and relationships."
+      },
+      {
+        "id": 223,
+        "name": "Conservation of Equality",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Understanding the properties of equality."
+      },
+      {
+        "id": 224,
+        "name": "One-Step Equations",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Solving basic one-step algebraic equations."
+      },
+      {
+        "id": 225,
+        "name": "Two-Step Equations",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Solving two-step algebraic equations."
+      },
+      {
+        "id": 226,
+        "name": "Problem Solving",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Applying algebraic equations to solve real-world problems."
+      },
+      {
+        "id": 227,
+        "name": "Linear Equations with One Variable",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Introduction to linear equations in one variable."
+      },
+      {
+        "id": 228,
+        "name": "Solution of a Linear Equation with One Variable",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Finding the solution to a linear equation."
+      },
+      {
+        "id": 229,
+        "name": "Finding One Quantity When One of the Quantities in a Ratio is 1",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Solving problems related to proportions."
+      },
+      {
+        "id": 230,
+        "name": "Ratio",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Advanced concepts of ratios."
+      },
+      {
+        "id": 231,
+        "name": "Ratio Problems",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Complex problems with ratios and proportions."
+      },
+      {
+        "id": 232,
+        "name": "Proportion",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Understanding proportions and their properties."
+      },
+      {
+        "id": 233,
+        "name": "Direct Proportion (Direct Variation)",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Introduction to direct proportion."
+      },
+      {
+        "id": 234,
+        "name": "Inverse Proportion (Inverse Variation)",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Introduction to inverse proportion."
+      },
+      {
+        "id": 235,
+        "name": "Constant of Proportionality",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Understanding the constant of proportionality in direct and inverse variations."
+      },
+      {
+        "id": 236,
+        "name": "Proportional Relationships",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Exploring proportional relationships in various contexts."
+      },
+      {
+        "id": 237,
+        "name": "Proportion Problems",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Solving real-world problems involving proportions."
+      },
+      {
+        "id": 238,
+        "name": "Finding a Specified Percentage of a Quantity and the Whole Quantity Given a Certain Percentage of It",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Solving problems with percentages."
+      },
+      {
+        "id": 239,
+        "name": "Calculating a Quantity as a Percentage of Another Quantity",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Calculating percentages."
+      },
+      {
+        "id": 240,
+        "name": "Increasing or Decreasing a Quantity by a Certain Percentage",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Applying percentages to change quantities."
+      },
+      {
+        "id": 241,
+        "name": "Drawing the Angle Bisector of an Angle",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Constructing the angle bisector with a compass and straightedge."
+      },
+      {
+        "id": 242,
+        "name": "Positions of Three Lines on the Same Plane Relative to Each Other",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Analyzing how three lines can be positioned in a plane."
+      },
+      {
+        "id": 243,
+        "name": "Angles",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Advanced concepts and properties of angles."
+      },
+      {
+        "id": 244,
+        "name": "Triangle Angle Problems",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Finding angle measures in triangles."
+      },
+      {
+        "id": 245,
+        "name": "Diagonals, Interior, and Exterior Angles of Polygons",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Exploring the properties of polygons."
+      },
+      {
+        "id": 246,
+        "name": "Properties of Sides, Angles, and Diagonals of Quadrilaterals",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Exploring properties of quadrilaterals."
+      },
+      {
+        "id": 247,
+        "name": "Area of a Rhombus and Trapezoid",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Calculating the area of a rhombus and a trapezoid."
+      },
+      {
+        "id": 248,
+        "name": "Relationship Between Perimeter and Area",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Understanding how perimeter and area relate to each other."
+      },
+      {
+        "id": 249,
+        "name": "Central Angles and Arcs Intercepted by These Angles in a Circle",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Exploring relationships in circles."
+      },
+      {
+        "id": 250,
+        "name": "Length of a Circle and a Circular Arc",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Calculating circumference and arc length."
+      },
+      {
+        "id": 251,
+        "name": "Area of a Circle and a Sector of a Circle",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Calculating the area of a circle and sector."
+      },
+      {
+        "id": 252,
+        "name": "Line Graph",
+        "category": "Mathematics",
+        "subcategory": "Statistics",
+        "description": "Creating and interpreting line graphs."
+      },
+      {
+        "id": 253,
+        "name": "Mean, Median, and Mode of a Data Set",
+        "category": "Mathematics",
+        "subcategory": "Statistics",
+        "description": "Calculating and understanding measures of central tendency."
+      },
+      {
+        "id": 254,
+        "name": "Circle Graph (Pie Chart)",
+        "category": "Mathematics",
+        "subcategory": "Statistics",
+        "description": "Creating and interpreting pie charts."
+      },
+      {
+        "id": 255,
+        "name": "Representing Data with an Appropriate Graph",
+        "category": "Mathematics",
+        "subcategory": "Statistics",
+        "description": "Selecting the best type of graph to represent data."
+      },
+      {
+        "id": 256,
+        "name": "Factors and Multiples",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Advanced exploration of factors and multiples."
+      },
+      {
+        "id": 257,
+        "name": "Exponents",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Review and extension of exponent rules."
+      },
+      {
+        "id": 258,
+        "name": "Square Roots",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Introduction to square roots and radicals."
+      },
+      {
+        "id": 259,
+        "name": "Data Analysis",
+        "category": "Mathematics",
+        "subcategory": "Statistics",
+        "description": "Techniques for analyzing and interpreting data sets."
+      },
+      {
+        "id": 260,
+        "name": "Probability of Simple Events",
+        "category": "Mathematics",
+        "subcategory": "Statistics",
+        "description": "Calculating the probability of basic events."
+      },
+      {
+        "id": 261,
+        "name": "Algebraic Expressions",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Simplifying and manipulating algebraic expressions."
+      },
+      {
+        "id": 262,
+        "name": "Identities",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Exploring algebraic identities and their applications."
+      },
+      {
+        "id": 263,
+        "name": "Coordinate System",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Introduction to the Cartesian coordinate system."
+      },
+      {
+        "id": 264,
+        "name": "Linear Equations",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Graphing and solving linear equations."
+      },
+      {
+        "id": 265,
+        "name": "Triangles",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Advanced concepts and properties of triangles."
+      },
+      {
+        "id": 266,
+        "name": "Triangle Angle Problems",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Solving problems involving angles in triangles."
+      },
+      {
+        "id": 267,
+        "name": "Side Properties of Right Triangles",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Exploring the Pythagorean theorem and other relationships."
+      },
+      {
+        "id": 268,
+        "name": "Translation",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Understanding geometric translations."
+      },
+      {
+        "id": 269,
+        "name": "Rotation",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Understanding geometric rotations."
+      },
+      {
+        "id": 270,
+        "name": "Geometric Solids",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Identifying and classifying different types of three-dimensional shapes."
+      },
+      {
+        "id": 271,
+        "name": "Propositions and Compound Propositions",
+        "category": "Mathematics",
+        "subcategory": "Logic",
+        "description": "Introduction to logical propositions and their combinations."
+      },
+      {
+        "id": 272,
+        "name": "Basic Concepts in Sets",
+        "category": "Mathematics",
+        "subcategory": "Set Theory",
+        "description": "Fundamental concepts of sets, elements, and notation."
+      },
+      {
+        "id": 273,
+        "name": "Operations with Sets",
+        "category": "Mathematics",
+        "subcategory": "Set Theory",
+        "description": "Union, intersection, complement, and other set operations."
+      },
+      {
+        "id": 274,
+        "name": "Number Sets",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Exploring different sets of numbers (natural, integers, rational, etc.)."
+      },
+      {
+        "id": 275,
+        "name": "Rational and Irrational Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Understanding the distinction between rational and irrational numbers."
+      },
+      {
+        "id": 276,
+        "name": "Divisibility Rules",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Applying divisibility rules to determine factors of numbers."
+      },
+      {
+        "id": 277,
+        "name": "Greatest Common Divisor (GCD) and Least Common Multiple (LCM) in Integers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Finding the GCD and LCM of integers."
+      },
+      {
+        "id": 278,
+        "name": "First Degree Equations and Inequalities",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Solving linear equations and inequalities."
+      },
+      {
+        "id": 279,
+        "name": "Systems of Equations",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Solving systems of two or more linear equations."
+      },
+      {
+        "id": 280,
+        "name": "Solving First Degree Equations and Inequalities",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Techniques for solving linear equations and inequalities."
+      },
+      {
+        "id": 281,
+        "name": "First Degree Absolute Value Equations and Inequalities",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Solving equations and inequalities involving absolute value."
+      },
+      {
+        "id": 282,
+        "name": "Exponential Expressions and Equations",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Simplifying and solving exponential expressions and equations."
+      },
+      {
+        "id": 283,
+        "name": "Radical Expressions and Equations",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Simplifying and solving radical expressions and equations."
+      },
+      {
+        "id": 284,
+        "name": "Ratio and Proportion",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Solving problems involving ratios and proportions."
+      },
+      {
+        "id": 285,
+        "name": "Problems",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Application of algebraic concepts to solve real-world problems."
+      },
+      {
+        "id": 286,
+        "name": "Angle Properties in Triangles",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Exploring the relationships between angles in triangles."
+      },
+      {
+        "id": 287,
+        "name": "Angle-Side Relationships in Triangles",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Exploring the relationships between angles and sides in triangles."
+      },
+      {
+        "id": 288,
+        "name": "Congruence in Triangles",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Understanding the conditions for triangle congruence."
+      },
+      {
+        "id": 289,
+        "name": "Similarity in Triangles",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Understanding the conditions for triangle similarity."
+      },
+      {
+        "id": 290,
+        "name": "Angle Bisector in a Triangle",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Properties and applications of the angle bisector in a triangle."
+      },
+      {
+        "id": 291,
+        "name": "Median in a Triangle",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Properties and applications of the median in a triangle."
+      },
+      {
+        "id": 292,
+        "name": "Auxiliary Elements of a Triangle",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Exploring other special line segments in a triangle (altitude, perpendicular bisector)."
+      },
+      {
+        "id": 293,
+        "name": "Pythagorean Theorem in Right Triangles",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Applying the Pythagorean theorem to solve problems."
+      },
+      {
+        "id": 294,
+        "name": "Trigonometric Ratios of Acute Angles in Right Triangles",
+        "category": "Mathematics",
+        "subcategory": "Trigonometry",
+        "description": "Introduction to sine, cosine, and tangent."
+      },
+      {
+        "id": 295,
+        "name": "Unit Circle and Trigonometric Ratios",
+        "category": "Mathematics",
+        "subcategory": "Trigonometry",
+        "description": "Relating trigonometric ratios to the unit circle."
+      },
+      {
+        "id": 296,
+        "name": "Area Applications in Triangles",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Calculating the area of triangles using different methods."
+      },
+      {
+        "id": 297,
+        "name": "Measures of Central Tendency and Dispersion",
+        "category": "Mathematics",
+        "subcategory": "Statistics",
+        "description": "Mean, median, mode, range, and standard deviation."
+      },
+      {
+        "id": 298,
+        "name": "Graphical Representation of Data",
+        "category": "Mathematics",
+        "subcategory": "Statistics",
+        "description": "Creating and interpreting histograms, box plots, scatter plots, etc."
+      },
+      {
+        "id": 299,
+        "name": "Counting Using Addition and Multiplication Principles",
+        "category": "Mathematics",
+        "subcategory": "Combinatorics",
+        "description": "Applying fundamental counting principles."
+      },
+      {
+        "id": 300,
+        "name": "Permutations",
+        "category": "Mathematics",
+        "subcategory": "Combinatorics",
+        "description": "Understanding and calculating permutations."
+      },
+      {
+        "id": 301,
+        "name": "Combinations",
+        "category": "Mathematics",
+        "subcategory": "Combinatorics",
+        "description": "Understanding and calculating combinations."
+      },
+      {
+        "id": 302,
+        "name": "Pascal's Triangle",
+        "category": "Mathematics",
+        "subcategory": "Combinatorics",
+        "description": "Exploring Pascal's Triangle and its properties."
+      },
+      {
+        "id": 303,
+        "name": "Binomial Theorem",
+        "category": "Mathematics",
+        "subcategory": "Combinatorics",
+        "description": "Applying the Binomial Theorem to expand binomial expressions."
+      },
+      {
+        "id": 304,
+        "name": "Probabilities of Conditional Events",
+        "category": "Mathematics",
+        "subcategory": "Probability",
+        "description": "Calculating the probability of conditional events."
+      },
+      {
+        "id": 305,
+        "name": "Probabilities of Simple Events",
+        "category": "Mathematics",
+        "subcategory": "Probability",
+        "description": "Review of probabilities of simple events."
+      },
+      {
+        "id": 306,
+        "name": "Probabilities of Compound Events",
+        "category": "Mathematics",
+        "subcategory": "Probability",
+        "description": "Calculating the probability of compound events."
+      },
+      {
+        "id": 307,
+        "name": "Concept and Representation of a Function",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Formal definition and representation of functions."
+      },
+      {
+        "id": 308,
+        "name": "Problems Related to Functions",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Solving various problems involving functions."
+      },
+      {
+        "id": 309,
+        "name": "Graphs of Functions",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Graphing different types of functions."
+      },
+      {
+        "id": 310,
+        "name": "Piecewise Functions",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Understanding and graphing piecewise functions."
+      },
+      {
+        "id": 311,
+        "name": "Linear Functions",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Properties and applications of linear functions."
+      },
+      {
+        "id": 312,
+        "name": "Composition of Functions",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Understanding and performing composition of functions."
+      },
+      {
+        "id": 313,
+        "name": "Inverse of a Function",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Finding the inverse of a function."
+      },
+      {
+        "id": 314,
+        "name": "Problems Related to Inverse Functions",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Solving problems involving inverse functions."
+      },
+      {
+        "id": 315,
+        "name": "Concept of a Polynomial",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Defining and classifying polynomials."
+      },
+      {
+        "id": 316,
+        "name": "Addition and Subtraction of Polynomials",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Performing addition and subtraction operations on polynomials."
+      },
+      {
+        "id": 317,
+        "name": "Multiplication and Division of Polynomials",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Performing multiplication and division operations on polynomials."
+      },
+      {
+        "id": 318,
+        "name": "Finding the Values Where Polynomials Equal Zero",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Finding the roots or zeros of polynomials."
+      },
+      {
+        "id": 319,
+        "name": "Factoring Polynomials",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Techniques for factoring polynomials."
+      },
+      {
+        "id": 320,
+        "name": "Factoring Square Expressions",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Factoring perfect square trinomials and differences of squares."
+      },
+      {
+        "id": 321,
+        "name": "Quadratic Equations",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Introduction to quadratic equations and their properties."
+      },
+      {
+        "id": 322,
+        "name": "Simplifying Rational Expressions",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Simplifying algebraic fractions."
+      },
+      {
+        "id": 323,
+        "name": "Addition, Subtraction, Division, and Multiplication with Rational Expressions",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Operations with algebraic fractions."
+      },
+      {
+        "id": 324,
+        "name": "Quadratic Equations with One Unknown",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Solving quadratic equations with one variable."
+      },
+      {
+        "id": 325,
+        "name": "Quadratic Equation Problems",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Solving real-world problems involving quadratic equations."
+      },
+      {
+        "id": 326,
+        "name": "The Quadratic Formula (Delta Formula)",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Using the quadratic formula to solve quadratic equations."
+      },
+      {
+        "id": 327,
+        "name": "Complex Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Introduction to complex numbers and their properties."
+      },
+      {
+        "id": 328,
+        "name": "Operations with Complex Numbers",
+        "category": "Mathematics",
+        "subcategory": "Number Theory",
+        "description": "Performing operations with complex numbers."
+      },
+      {
+        "id": 329,
+        "name": "Polygons",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Review of polygons and their properties."
+      },
+      {
+        "id": 330,
+        "name": "Quadrilaterals",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Review of quadrilaterals and their properties."
+      },
+      {
+        "id": 331,
+        "name": "Special Quadrilaterals",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Exploring properties of parallelograms, rectangles, squares, rhombuses, and trapezoids."
+      },
+      {
+        "id": 332,
+        "name": "Area Models",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Using area models to solve geometric problems."
+      },
+      {
+        "id": 333,
+        "name": "Solid Figures",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Identifying and classifying different types of three-dimensional shapes."
+      },
+      {
+        "id": 334,
+        "name": "Directed Angles",
+        "category": "Mathematics",
+        "subcategory": "Trigonometry",
+        "description": "Understanding angles with direction and magnitude."
+      },
+      {
+        "id": 335,
+        "name": "Trigonometric Functions",
+        "category": "Mathematics",
+        "subcategory": "Trigonometry",
+        "description": "In-depth study of sine, cosine, tangent, cotangent, secant, and cosecant."
+      },
+      {
+        "id": 336,
+        "name": "Graphs of Trigonometric Functions",
+        "category": "Mathematics",
+        "subcategory": "Trigonometry",
+        "description": "Analyzing and graphing trigonometric functions."
+      },
+      {
+        "id": 337,
+        "name": "Law of Cosines",
+        "category": "Mathematics",
+        "subcategory": "Trigonometry",
+        "description": "Applying the Law of Cosines to solve triangles."
+      },
+      {
+        "id": 338,
+        "name": "Law of Sines",
+        "category": "Mathematics",
+        "subcategory": "Trigonometry",
+        "description": "Applying the Law of Sines to solve triangles."
+      },
+      {
+        "id": 339,
+        "name": "Trigonometry Problems",
+        "category": "Mathematics",
+        "subcategory": "Trigonometry",
+        "description": "Solving complex trigonometric problems."
+      },
+      {
+        "id": 340,
+        "name": "Angle Sum Formulas",
+        "category": "Mathematics",
+        "subcategory": "Trigonometry",
+        "description": "Using trigonometric angle sum and difference formulas."
+      },
+      {
+        "id": 341,
+        "name": "Polar Coordinates",
+        "category": "Mathematics",
+        "subcategory": "Analytic Geometry",
+        "description": "Introduction to polar coordinates and their relationship to Cartesian coordinates."
+      },
+      {
+        "id": 342,
+        "name": "Special Triangles",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Understanding properties of 30-60-90 and 45-45-90 triangles."
+      },
+      {
+        "id": 343,
+        "name": "Analytic Geometry of the Line",
+        "category": "Mathematics",
+        "subcategory": "Analytic Geometry",
+        "description": "Using coordinates to analyze lines and their properties."
+      },
+      {
+        "id": 344,
+        "name": "Coordinate Plane",
+        "category": "Mathematics",
+        "subcategory": "Analytic Geometry",
+        "description": "Review of the Cartesian coordinate plane."
+      },
+      {
+        "id": 345,
+        "name": "Geometric Shapes on the Coordinate Plane",
+        "category": "Mathematics",
+        "subcategory": "Analytic Geometry",
+        "description": "Analyzing and manipulating geometric shapes on the coordinate plane."
+      },
+      {
+        "id": 346,
+        "name": "Slope",
+        "category": "Mathematics",
+        "subcategory": "Analytic Geometry",
+        "description": "Understanding the concept of slope and its applications."
+      },
+      {
+        "id": 347,
+        "name": "Point-Slope Form",
+        "category": "Mathematics",
+        "subcategory": "Analytic Geometry",
+        "description": "Using the point-slope form of a linear equation."
+      },
+      {
+        "id": 348,
+        "name": "Applications with Functions",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Real-world applications of functions."
+      },
+      {
+        "id": 349,
+        "name": "Linear Functions",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "In-depth analysis of linear functions."
+      },
+      {
+        "id": 350,
+        "name": "Linear Equations",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Solving linear equations and inequalities."
+      },
+      {
+        "id": 351,
+        "name": "Intercepts",
+        "category": "Mathematics",
+        "subcategory": "Analytic Geometry",
+        "description": "Finding x- and y-intercepts of equations and graphs."
+      },
+      {
+        "id": 352,
+        "name": "Intervals",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Understanding interval notation and its use in describing sets of numbers."
+      },
+      {
+        "id": 353,
+        "name": "Finding the Average Rate of Change",
+        "category": "Mathematics",
+        "subcategory": "Calculus",
+        "description": "Introduction to the concept of average rate of change."
+      },
+      {
+        "id": 354,
+        "name": "Quadratic Functions",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Analyzing quadratic functions and their graphs."
+      },
+      {
+        "id": 355,
+        "name": "Quadratic Equations",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Solving quadratic equations using various methods."
+      },
+      {
+        "id": 356,
+        "name": "Transformations of Functions",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Understanding translations, reflections, and dilations of functions."
+      },
+      {
+        "id": 357,
+        "name": "Systems of Quadratic Equations with Two Variables",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Solving systems of equations where at least one equation is quadratic."
+      },
+      {
+        "id": 358,
+        "name": "Quadratic Inequalities with One Variable and Systems of Inequalities",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Solving quadratic inequalities and systems of inequalities."
+      },
+      {
+        "id": 359,
+        "name": "Basic Elements of a Circle",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Review of radius, diameter, chord, tangent, secant, etc."
+      },
+      {
+        "id": 360,
+        "name": "Arc Length in a Circle",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Calculating arc length using radian measure."
+      },
+      {
+        "id": 361,
+        "name": "Angles in a Circle",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Exploring relationships between central, inscribed, and tangent-chord angles."
+      },
+      {
+        "id": 362,
+        "name": "Circle and Different Geometric Shapes",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Exploring intersections and relationships between circles and other geometric shapes."
+      },
+      {
+        "id": 363,
+        "name": "Tangent Line to a Circle",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Properties of tangents to circles."
+      },
+      {
+        "id": 364,
+        "name": "Circumference and Area of a Circle",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Calculating circumference and area of circles."
+      },
+      {
+        "id": 365,
+        "name": "Solid Figures",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Calculating surface area and volume of different 3D shapes."
+      },
+      {
+        "id": 366,
+        "name": "Probability",
+        "category": "Mathematics",
+        "subcategory": "Probability",
+        "description": "Advanced concepts and calculations in probability."
+      },
+      {
+        "id": 367,
+        "name": "Conditional Probability",
+        "category": "Mathematics",
+        "subcategory": "Probability",
+        "description": "Calculating and understanding conditional probability."
+      },
+      {
+        "id": 368,
+        "name": "Simple Probability",
+        "category": "Mathematics",
+        "subcategory": "Probability",
+        "description": "Review of basic probability concepts."
+      },
+      {
+        "id": 369,
+        "name": "Dependent and Independent Events",
+        "category": "Mathematics",
+        "subcategory": "Probability",
+        "description": "Understanding the difference between dependent and independent events."
+      },
+      {
+        "id": 370,
+        "name": "Experimental and Theoretical Probability",
+        "category": "Mathematics",
+        "subcategory": "Probability",
+        "description": "Comparing experimental and theoretical probabilities."
+      },
+      {
+        "id": 371,
+        "name": "Exponential Function",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Detailed exploration of exponential functions and their properties."
+      },
+      {
+        "id": 372,
+        "name": "Exponential Models",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Using exponential functions to model real-world phenomena."
+      },
+      {
+        "id": 373,
+        "name": "Logarithmic Function",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Detailed exploration of logarithmic functions and their properties."
+      },
+      {
+        "id": 374,
+        "name": "Logarithmic Function with Base 10 and e",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Focus on common and natural logarithms."
+      },
+      {
+        "id": 375,
+        "name": "Exponential and Logarithmic Equations and Inequalities",
+        "category": "Mathematics",
+        "subcategory": "Algebra",
+        "description": "Solving equations and inequalities involving exponential and logarithmic functions."
+      },
+      {
+        "id": 376,
+        "name": "Concept of a Sequence",
+        "category": "Mathematics",
+        "subcategory": "Discrete Mathematics",
+        "description": "Introduction to sequences and their properties."
+      },
+      {
+        "id": 377,
+        "name": "Properties of Arithmetic Sequences",
+        "category": "Mathematics",
+        "subcategory": "Discrete Mathematics",
+        "description": "Understanding arithmetic sequences and series."
+      },
+      {
+        "id": 378,
+        "name": "Properties of Geometric Sequences",
+        "category": "Mathematics",
+        "subcategory": "Discrete Mathematics",
+        "description": "Understanding geometric sequences and series."
+      },
+      {
+        "id": 379,
+        "name": "Terms of a Sequence Given by a General Term or a Recurrence Relation",
+        "category": "Mathematics",
+        "subcategory": "Discrete Mathematics",
+        "description": "Finding terms of sequences using different definitions."
+      },
+      {
+        "id": 380,
+        "name": "Sequence Problems",
+        "category": "Mathematics",
+        "subcategory": "Discrete Mathematics",
+        "description": "Solving problems involving sequences and series."
+      },
+      {
+        "id": 381,
+        "name": "Trigonometric Values of the Sum and Difference of Two Angles",
+        "category": "Mathematics",
+        "subcategory": "Trigonometry",
+        "description": "Applying trigonometric sum and difference identities."
+      },
+      {
+        "id": 382,
+        "name": "Double Angle Formulas",
+        "category": "Mathematics",
+        "subcategory": "Trigonometry",
+        "description": "Using trigonometric double-angle formulas."
+      },
+      {
+        "id": 383,
+        "name": "Trigonometry with Complementary and Supplementary Angles",
+        "category": "Mathematics",
+        "subcategory": "Trigonometry",
+        "description": "Using relationships between trigonometric functions of complementary and supplementary angles."
+      },
+      {
+        "id": 384,
+        "name": "Law of Sines and Law of Cosines",
+        "category": "Mathematics",
+        "subcategory": "Trigonometry",
+        "description": "Review and advanced applications of the Laws of Sines and Cosines."
+      },
+      {
+        "id": 385,
+        "name": "Trigonometry Questions",
+        "category": "Mathematics",
+        "subcategory": "Trigonometry",
+        "description": "Complex trigonometry problems."
+      },
+      {
+        "id": 386,
+        "name": "Trigonometric Equations",
+        "category": "Mathematics",
+        "subcategory": "Trigonometry",
+        "description": "Solving trigonometric equations."
+      },
+      {
+        "id": 387,
+        "name": "Coordinates of the Image of a Point Under Translation Transformation in the Analytic Plane",
+        "category": "Mathematics",
+        "subcategory": "Analytic Geometry",
+        "description": "Finding the image of a point after translation."
+      },
+      {
+        "id": 388,
+        "name": "Coordinates of the Image of a Point Under Symmetry Transformation in the Analytic Plane",
+        "category": "Mathematics",
+        "subcategory": "Analytic Geometry",
+        "description": "Finding the image of a point after reflection/symmetry."
+      },
+      {
+        "id": 389,
+        "name": "Translation",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Detailed exploration of translation transformations."
+      },
+      {
+        "id": 390,
+        "name": "Reflection",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Detailed exploration of reflection transformations."
+      },
+      {
+        "id": 391,
+        "name": "Rotation",
+        "category": "Mathematics",
+        "subcategory": "Geometry",
+        "description": "Detailed exploration of rotation transformations."
+      },
+      {
+        "id": 392,
+        "name": "Left-Hand and Right-Hand Limit of a Function at a Point",
+        "category": "Mathematics",
+        "subcategory": "Calculus",
+        "description": "Introduction to left- and right-hand limits."
+      },
+      {
+        "id": 393,
+        "name": "Properties Related to Limits",
+        "category": "Mathematics",
+        "subcategory": "Calculus",
+        "description": "Understanding the properties of limits."
+      },
+      {
+        "id": 394,
+        "name": "Continuity of a Function at a Point",
+        "category": "Mathematics",
+        "subcategory": "Calculus",
+        "description": "Defining and testing continuity of a function."
+      },
+      {
+        "id": 395,
+        "name": "Concept of Derivative",
+        "category": "Mathematics",
+        "subcategory": "Calculus",
+        "description": "Introduction to the derivative and its geometric interpretation."
+      },
+      {
+        "id": 396,
+        "name": "Differentiability of a Function at a Point and in an Interval",
+        "category": "Mathematics",
+        "subcategory": "Calculus",
+        "description": "Understanding differentiability and its relationship to continuity."
+      },
+      {
+        "id": 397,
+        "name": "Derivative of the Sum, Difference, Product, and Quotient of Two Functions",
+        "category": "Mathematics",
+        "subcategory": "Calculus",
+        "description": "Applying differentiation rules."
+      },
+      {
+        "id": 398,
+        "name": "Intervals Where a Function is Increasing or Decreasing",
+        "category": "Mathematics",
+        "subcategory": "Calculus",
+        "description": "Using the derivative to determine where a function is increasing or decreasing."
+      },
+      {
+        "id": 399,
+        "name": "Extremum Points of a Function",
+        "category": "Mathematics",
+        "subcategory": "Calculus",
+        "description": "Finding local maxima and minima using the derivative."
+      },
+      {
+        "id": 400,
+        "name": "Function Graphs Drawn Using Derivatives",
+        "category": "Mathematics",
+        "subcategory": "Calculus",
+        "description": "Sketching graphs of functions using derivative information."
+      },
+      {
+        "id": 401,
+        "name": "Indefinite Integral of a Function",
+        "category": "Mathematics",
+        "subcategory": "Calculus",
+        "description": "Introduction to indefinite integrals (antiderivatives)."
+      },
+      {
+        "id": 402,
+        "name": "Integration by Substitution",
+        "category": "Mathematics",
+        "subcategory": "Calculus",
+        "description": "Using u-substitution to evaluate integrals."
+      },
+      {
+        "id": 403,
+        "name": "Definite Integral and Its Applications",
+        "category": "Mathematics",
+        "subcategory": "Calculus",
+        "description": "Calculating definite integrals and their applications (area, etc.)."
+      }
+    ]
+  }

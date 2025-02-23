@@ -1,6 +1,6 @@
 from pydantic import BaseModel, EmailStr
 from typing import Optional, List
-from datetime import datetime
+from datetime import datetime, date
 
 class UserBase(BaseModel):
     username: str
@@ -61,4 +61,57 @@ class UserWithProfile(User):
     chat_messages: List[ChatMessageResponse] = []
 
     class Config:
-        from_attributes = True 
+        from_attributes = True
+
+class Subject(BaseModel):
+    id: int
+    name: str
+    category: str  # e.g., "Mathematics", "Physics", "Chemistry", "Biology"
+    subcategory: Optional[str] = None
+    description: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+class TutorialBase(BaseModel):
+    subject_id: int
+    title: str
+    content: str
+    difficulty_level: str  # "Beginner", "Intermediate", "Advanced"
+    visual_aids: List[dict]  # List of related visual resources (videos, images, etc.)
+
+class TutorialCreate(TutorialBase):
+    pass
+
+class Tutorial(TutorialBase):
+    id: int
+    created_at: datetime
+    last_viewed_at: Optional[datetime] = None
+
+    class Config:
+        from_attributes = True
+
+class UserTutorialHistory(BaseModel):
+    id: int
+    user_id: int
+    tutorial_id: int
+    viewed_at: datetime
+
+    class Config:
+        from_attributes = True
+
+class TimeSpentRecord(BaseModel):
+    id: int
+    user_id: int
+    date: date
+    total_seconds: int
+    hours: int
+    minutes: int
+    seconds: int
+
+    class Config:
+        from_attributes = True
+
+class WeeklyTimeReport(BaseModel):
+    days: List[TimeSpentRecord]
+    total_hours: float 
