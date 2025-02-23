@@ -11,6 +11,7 @@ from database import engine, get_db
 from typing import Optional
 from fastapi.responses import JSONResponse
 from chatbot import get_chat_response, UserProfile
+from routes import subjects, cache
 
 # Create the database tables
 models.Base.metadata.create_all(bind=engine)
@@ -24,7 +25,12 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"]
 )
+
+# Include routers
+app.include_router(subjects.router, prefix="/api/subjects", tags=["subjects"])
+app.include_router(cache.router, prefix="/api/cache", tags=["cache"])
 
 @app.post("/signup", response_model=schemas.User)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
@@ -205,8 +211,9 @@ async def chat(
             image_data=image_data
         )
 
-        return {"response": response}
+        return {"response": response if response else "I'm sorry, I couldn't generate a response."}
     except Exception as e:
+        print(f"Chat error: {e}")  # Log the error
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=str(e)
@@ -220,6 +227,10 @@ async def delete_session(
     """Delete a chat session"""
     success = chatbot.delete_chat_session(str(current_user.id), session_id)
     return {"status": "success" if success else "failed"}
+
+@app.get("/signup/me", response_model=schemas.User)
+def get_current_user_info(current_user: models.User = Depends(auth.get_current_user)):
+    return current_user
 
 if __name__ == "__main__":
     import uvicorn
