@@ -1,5 +1,5 @@
-from datetime import timedelta, datetime, date
-from fastapi import FastAPI, Depends, HTTPException, status
+from datetime import timedelta
+from fastapi import FastAPI, Depends, HTTPException, status, UploadFile, Form, File
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
@@ -8,10 +8,9 @@ import schemas
 import auth
 import chatbot
 from database import engine, get_db
-import json
-from typing import List, Optional
-import google.generativeai as genai
-import re
+from typing import Optional
+from fastapi.responses import JSONResponse
+from chatbot import get_chat_response, UserProfile
 
 # Create the database tables
 models.Base.metadata.create_all(bind=engine)
@@ -26,14 +25,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# Load mock subjects
-with open("subjects.json") as f:
-    MOCK_SUBJECTS = json.load(f)
-
-# Configure Gemini
-genai.configure(api_key='YOUR_GEMINI_API_KEY')
-model = genai.GenerativeModel('gemini-2.0-flash')
 
 @app.post("/signup", response_model=schemas.User)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
@@ -157,270 +148,79 @@ def delete_learning_profile(
     db.commit()
     return {"message": "Learning profile deleted successfully"}
 
-@app.post("/chat", response_model=schemas.ChatMessageResponse)
-async def create_chat_message(
-    message: schemas.ChatMessageCreate,
-    db: Session = Depends(get_db),
-    current_user: models.User = Depends(auth.get_current_user)
+@app.post("/api/chat/sessions")
+async def create_session(
+    title: str = "New Chat",
+    user_id: str = Form("default_user")
 ):
-    """
-    Process a chat message through the Planning and Analysis agents
-    and store the results in the database
-    """
-    # Get response from chatbot
-    planning_analysis, final_analysis, response = await chatbot.get_chat_response(message.content)
-    
-    # Create chat message
-    db_message = models.ChatMessage(
-        user_id=current_user.id,
-        content=message.content,
-        response=response,
-        planning_analysis=planning_analysis,
-        final_analysis=final_analysis
-    )
-    
-    # Save to database
-    db.add(db_message)
-    db.commit()
-    db.refresh(db_message)
-    
-    return db_message
-
-@app.get("/chat/history", response_model=list[schemas.ChatMessageResponse])
-async def get_chat_history(
-    db: Session = Depends(get_db),
-    current_user: models.User = Depends(auth.get_current_user)
-):
-    """Get chat history for the current user"""
-    messages = db.query(models.ChatMessage).filter(
-        models.ChatMessage.user_id == current_user.id
-    ).order_by(models.ChatMessage.created_at.desc()).all()
-    return messages
-
-@app.get("/subjects", response_model=List[schemas.Subject])
-def get_subjects(
-    search: Optional[str] = None,
-    category: Optional[str] = None,
-    db: Session = Depends(get_db)
-):
-    query = db.query(models.Subject)
-    
-    if search:
-        query = query.filter(models.Subject.name.ilike(f"%{search}%"))
-    if category:
-        query = query.filter(models.Subject.category == category)
-    
-    return query.all()
-
-@app.get("/subjects/{subject_id}/tutorial", response_model=schemas.Tutorial)
-async def get_tutorial(
-    subject_id: int,
-    db: Session = Depends(get_db),
-    current_user: models.User = Depends(auth.get_current_user)
-):
-    # Get subject
-    subject = db.query(models.Subject).filter(models.Subject.id == subject_id).first()
-    if not subject:
-        raise HTTPException(status_code=404, detail="Subject not found")
-    
-    # Check if tutorial exists
-    tutorial = db.query(models.Tutorial).filter(models.Tutorial.subject_id == subject_id).first()
-    
-    if not tutorial:
-        # Generate tutorial content using AI
-        prompt = f"Create a detailed tutorial about {subject.name}. Include key concepts, examples, and explanations."
-        response = await model.generate_content(prompt)
-        content = response.text
-        
-        # Generate visual aids using Gemini
-        visual_prompt = f"Find educational resources for {subject.name}. Include YouTube videos, interactive websites, and visual aids."
-        visual_response = await model.generate_content(visual_prompt)
-        visual_aids = visual_response.text
-        
-        # Create new tutorial
-        tutorial = models.Tutorial(
-            subject_id=subject_id,
-            title=f"Tutorial: {subject.name}",
-            content=content,
-            difficulty_level="Intermediate",
-            visual_aids=json.dumps({"resources": visual_aids})
+    """Create a new chat session"""
+    try:
+        session = chatbot.create_chat_session(user_id, title)
+        return session
+    except Exception as e:
+        print(f"Error creating session: {e}")
+        return JSONResponse(
+            status_code=500,
+            content={"error": "Failed to create session"}
         )
-        db.add(tutorial)
-        db.commit()
-        db.refresh(tutorial)
-    
-    # Record view history
-    history = models.UserTutorialHistory(
-        user_id=current_user.id,
-        tutorial_id=tutorial.id
-    )
-    db.add(history)
-    
-    # Update last viewed timestamp
-    tutorial.last_viewed_at = datetime.utcnow()
-    db.commit()
-    
-    return tutorial
 
-@app.get("/user/tutorial-history", response_model=List[schemas.Tutorial])
-def get_user_tutorial_history(
-    db: Session = Depends(get_db),
-    current_user: models.User = Depends(auth.get_current_user)
-):
-    history = db.query(models.Tutorial).\
-        join(models.UserTutorialHistory).\
-        filter(models.UserTutorialHistory.user_id == current_user.id).\
-        order_by(models.UserTutorialHistory.viewed_at.desc()).\
-        all()
-    
+@app.get("/chat/history")
+async def get_history(current_user: models.User = Depends(auth.get_current_user)):
+    """Get all chat history for the current user"""
+    history = chatbot.get_chat_history(str(current_user.id))
     return history
 
-@app.post("/pomodoro/active", response_model=schemas.TimeSpentRecord)
-async def update_active_time(
+@app.post("/chat")
+async def chat(
+    message: str = Form(...),
+    image: Optional[UploadFile] = File(None),
     db: Session = Depends(get_db),
     current_user: models.User = Depends(auth.get_current_user)
 ):
-    # Get or create today's time record
-    today = datetime.utcnow().date()
-    time_record = db.query(models.TimeSpentRecord).filter(
-        models.TimeSpentRecord.user_id == current_user.id,
-        models.TimeSpentRecord.date == today
-    ).first()
-    
-    if not time_record:
-        time_record = models.TimeSpentRecord(
-            user_id=current_user.id,
-            date=today,
-            total_seconds=0
+    try:
+        # Get user's learning profile
+        profile = db.query(models.LearningProfile).filter(
+            models.LearningProfile.user_id == current_user.id
+        ).first()
+
+        # Convert profile to UserProfile if it exists
+        user_profile = None
+        if profile:
+            user_profile = UserProfile(
+                verbal_score=profile.verbal_score,
+                non_verbal_score=profile.non_verbal_score,
+                self_assessment=profile.self_assessment,
+                age=profile.age
+            )
+
+        # Process image if provided
+        image_data = None
+        if image:
+            image_data = await image.read()
+
+        # Get response from chatbot
+        response = await get_chat_response(
+            user_query=message,
+            user_profile=user_profile,
+            image_data=image_data
         )
-        db.add(time_record)
-    
-    # Add 30 seconds to total time
-    time_record.total_seconds += 30
-    
-    # Calculate hours, minutes, seconds
-    hours = time_record.total_seconds // 3600
-    minutes = (time_record.total_seconds % 3600) // 60
-    seconds = time_record.total_seconds % 60
-    
-    db.commit()
-    db.refresh(time_record)
-    
-    return schemas.TimeSpentRecord(
-        id=time_record.id,
-        user_id=time_record.user_id,
-        date=time_record.date,
-        total_seconds=time_record.total_seconds,
-        hours=hours,
-        minutes=minutes,
-        seconds=seconds
-    )
 
-@app.get("/time-spent/weekly", response_model=schemas.WeeklyTimeReport)
-async def get_weekly_time_report(
-    db: Session = Depends(get_db),
-    current_user: models.User = Depends(auth.get_current_user)
-):
-    # Calculate date range for the past week
-    end_date = datetime.utcnow().date()
-    start_date = end_date - timedelta(days=6)
-    
-    # Get records for the past week
-    records = db.query(models.TimeSpentRecord).filter(
-        models.TimeSpentRecord.user_id == current_user.id,
-        models.TimeSpentRecord.date >= start_date,
-        models.TimeSpentRecord.date <= end_date
-    ).all()
-    
-    # Process records
-    days = []
-    total_seconds = 0
-    
-    for record in records:
-        total_seconds += record.total_seconds
-        hours = record.total_seconds // 3600
-        minutes = (record.total_seconds % 3600) // 60
-        seconds = record.total_seconds % 60
-        
-        days.append(schemas.TimeSpentRecord(
-            id=record.id,
-            user_id=record.user_id,
-            date=record.date,
-            total_seconds=record.total_seconds,
-            hours=hours,
-            minutes=minutes,
-            seconds=seconds
-        ))
-    
-    return schemas.WeeklyTimeReport(
-        days=days,
-        total_hours=round(total_seconds / 3600, 2)
-    )
-
-@app.get("/user/subject-analysis", response_model=schemas.SubjectCategoryScore)
-async def analyze_subject_interests(
-    db: Session = Depends(get_db),
-    current_user: models.User = Depends(auth.get_current_user)
-):
-    # Get latest 100 chat messages
-    messages = db.query(models.ChatMessage).filter(
-        models.ChatMessage.user_id == current_user.id
-    ).order_by(models.ChatMessage.created_at.desc()).limit(100).all()
-    
-    if not messages:
-        return schemas.SubjectCategoryScore(
-            mathematics=20.0,
-            biology=20.0,
-            physics=20.0,
-            geometry=20.0,
-            chemistry=20.0
+        return {"response": response}
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=str(e)
         )
-    
-    # Prepare chat history for analysis
-    chat_history = "\n".join([
-        f"User: {msg.content}\nResponse: {msg.response}"
-        for msg in messages
-    ])
-    
-    # Create prompt for Gemini
-    prompt = """Analyze the following chat history and classify the content into these categories:
-    - Mathematics
-    - Biology
-    - Physics
-    - Geometry
-    - Chemistry
 
-    Provide ONLY the percentage distribution (adding up to 100%) in this exact format:
-    Mathematics: X%
-    Biology: X%
-    Physics: X%
-    Geometry: X%
-    Chemistry: X%
+@app.delete("/chat/sessions/{session_id}")
+async def delete_session(
+    session_id: str,
+    current_user: models.User = Depends(auth.get_current_user)
+):
+    """Delete a chat session"""
+    success = chatbot.delete_chat_session(str(current_user.id), session_id)
+    return {"status": "success" if success else "failed"}
 
-    Chat History:
-    """ + chat_history
-    
-    # Get analysis from Gemini
-    response = await model.generate_content(prompt)
-    analysis_text = response.text
-    
-    # Parse percentages using regex
-    pattern = r"(\w+):\s*(\d+(?:\.\d+)?)%"
-    matches = re.findall(pattern, analysis_text)
-    
-    # Convert to dictionary
-    scores = {}
-    for category, percentage in matches:
-        scores[category.lower()] = float(percentage)
-    
-    # Ensure all categories are present with at least 0%
-    default_categories = {
-        "mathematics": 0.0,
-        "biology": 0.0,
-        "physics": 0.0,
-        "geometry": 0.0,
-        "chemistry": 0.0
-    }
-    default_categories.update(scores)
-    
-    return schemas.SubjectCategoryScore(**default_categories) 
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000) 
