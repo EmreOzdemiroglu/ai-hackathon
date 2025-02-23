@@ -1,6 +1,13 @@
 import os
+import json
+import base64
 import google.generativeai as genai
 from dotenv import load_dotenv
+from PIL import Image
+from io import BytesIO
+from datetime import datetime
+from typing import List, Optional, Dict
+from pydantic import BaseModel
 
 # Load environment variables
 load_dotenv()
@@ -10,6 +17,16 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 # Initialize the model
 model = genai.GenerativeModel('gemini-2.0-flash')
+
+class Message(BaseModel):
+    content: str
+    role: str
+
+class UserProfile(BaseModel):
+    verbal_score: float
+    non_verbal_score: float
+    self_assessment: float
+    age: int
 
 PLANNING_AGENT_PROMPT = """
 ROLE:
@@ -69,41 +86,125 @@ PLANNING AGENT OUTPUT: {planning_output}
 USER QUERY: {user_query}
 """
 
-async def get_planning_analysis(user_query: str) -> str:
-    """Get analysis from the Planning Agent"""
-    prompt = PLANNING_AGENT_PROMPT.format(user_query=user_query)
-    response = await model.generate_content_async(prompt)
-    return response.text
 
-async def get_final_analysis(user_query: str, planning_output: str) -> str:
-    """Get analysis from the Analysis Agent"""
-    prompt = ANALYSIS_AGENT_PROMPT.format(
-        planning_output=planning_output,
-        user_query=user_query
-    )
-    response = await model.generate_content_async(prompt)
-    return response.text
+async def process_image(image_data: bytes) -> str:
+    """Process the uploaded image data into a base64 string"""
+    try:
+        # Convert bytes to PIL Image
+        image = Image.open(BytesIO(image_data))
+        
+        # Ensure the image is in RGB mode
+        if image.mode != 'RGB':
+            image = image.convert('RGB')
+            
+        # Convert image to base64
+        buffered = BytesIO()
+        image.save(buffered, format="JPEG")
+        img_str = base64.b64encode(buffered.getvalue()).decode()
+        return img_str
+    except Exception as e:
+        raise ValueError(f"Failed to process image: {str(e)}")
 
-async def get_chat_response(user_query: str) -> tuple[str, str, str]:
+async def get_vision_response(image_base64: str, query: str) -> str:
+    """Get response from Gemini for image analysis"""
+    try:
+        # Decode base64 string back to bytes
+        image_bytes = base64.b64decode(image_base64)
+        
+        # Create a Part object for the image
+        image_part = {
+            "mime_type": "image/jpeg",
+            "data": image_bytes
+        }
+        
+        # Create the prompt parts combining image and text
+        prompt_parts = [
+            image_part,
+            query
+        ]
+        
+        # Use generate_content with both image and text
+        response = await model.generate_content_async(prompt_parts)
+        return response.text
+    except Exception as e:
+        raise Exception(f"Failed to get vision response: {str(e)}")
+
+async def get_chat_response(
+    user_query: str,
+    user_profile: Optional[UserProfile] = None,
+    image_data: bytes = None
+) -> str:
     """
-    Process user query through both agents and return the final response
-    Returns: (planning_analysis, final_analysis, final_response)
+    Process user query and return the response
+    If image_data is provided, includes image analysis in the response
     """
-    # Get planning analysis
-    planning_analysis = await get_planning_analysis(user_query)
-    
-    # Get final analysis
-    final_analysis = await get_final_analysis(user_query, planning_analysis)
-    
-    # Generate final response
-    response_prompt = f"""
-    Based on the following analyses, provide a clear, concise, and helpful response to the user's query.
-    Keep the response friendly and constructive, focusing on actionable advice.
-    
-    User Query: {user_query}
-    Planning Analysis: {planning_analysis}
-    Final Analysis: {final_analysis}
-    """
-    final_response = await model.generate_content_async(response_prompt)
-    
-    return planning_analysis, final_analysis, final_response.text 
+    try:
+        # If image is provided, get vision analysis first
+        vision_analysis = ""
+        if image_data:
+            try:
+                image_base64 = await process_image(image_data)
+                vision_analysis = await get_vision_response(image_base64, user_query)
+                # Combine vision analysis with user query
+                user_query = f"{user_query}\n\nImage Analysis: {vision_analysis}"
+            except Exception as e:
+                print(f"Warning: Failed to process image: {str(e)}")
+        
+        # Generate response using Gemini
+        planning_analysis = await model.generate_content_async(PLANNING_AGENT_PROMPT.format(user_query=user_query))
+        final_analysis = await model.generate_content_async(ANALYSIS_AGENT_PROMPT.format(planning_output=planning_analysis, user_query=user_query))
+
+        # Determine response style based on user profile
+        response_style = ""
+        if user_profile:
+            if user_profile.verbal_score > user_profile.non_verbal_score:
+                response_style = """
+                Focus on providing detailed text explanations and story-based examples.
+                Break down concepts into clear, sequential steps.
+                Use analogies and metaphors to explain complex ideas.
+                Provide written examples and scenarios.
+                """
+            elif user_profile.non_verbal_score > user_profile.verbal_score:
+                response_style = """
+                Focus on interactive scaffolding and visual descriptions.
+                Use step-by-step guidance with clear checkpoints.
+                Incorporate spatial and pattern-based explanations.
+                Break complex tasks into smaller, manageable parts.
+                """
+            else:
+                response_style = """
+                Provide a balanced approach with both verbal and visual explanations.
+                Use concise explanations with supporting examples.
+                Combine text-based and pattern-based learning strategies.
+                """
+
+            # Add confidence level consideration
+            confidence_guidance = f"""
+            The user's self-assessment score is {user_profile.self_assessment}/10, indicating {'high' if user_profile.self_assessment > 7 else 'moderate' if user_profile.self_assessment > 4 else 'low'} confidence in non-verbal skills.
+            {'Provide additional encouragement and positive reinforcement.' if user_profile.self_assessment < 5 else 'Maintain supportive but direct communication.'}
+            """
+
+        prompt = f"""
+        You are a helpful AI assistant for helping students who has a disability called non-verbal learning to understand the concepts, understand ideas and solve the problems. Please provide a clear response to the following query:
+
+        User Profile Information:
+        {f'Age: {user_profile.age}' if user_profile else 'Age: Unknown'}
+        {f'Verbal Score: {user_profile.verbal_score}/2' if user_profile else ''}
+        {f'Non-verbal Score: {user_profile.non_verbal_score}/2' if user_profile else ''}
+        {f'Self-assessment Score: {user_profile.self_assessment}/10' if user_profile else ''}
+
+        Response Style Guidelines:
+        {response_style if user_profile else 'Provide a balanced approach to explanation.'}
+        {confidence_guidance if user_profile else ''}
+
+        User Query: {user_query}
+        Final Analysis: {final_analysis}
+        {f'Vision Analysis: {vision_analysis}' if image_data else ''}
+        
+        Please provide a helpful and informative response that matches the user's learning profile and needs.
+        """
+        response = await model.generate_content_async(prompt)
+        return response.text
+        
+    except Exception as e:
+        raise Exception(f"Failed to get chat response: {str(e)}") 

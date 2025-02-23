@@ -1,330 +1,286 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Sidebar from '../components/Sidebar';
-import ChatHistoryPanel, { ChatSession } from '../components/ChatHistoryPanel';
-import { chatService, type ChatResponse } from '../services/api';
+import ChatHistoryPanel from '../components/ChatHistoryPanel';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import type { Components } from 'react-markdown';
+import styles from './chatbot.module.css';
+import { API_ENDPOINTS } from '../config/api';
 
 interface ChatMessage {
-  text: string;
-  isUser: boolean;
-  image?: string;
+  role: 'user' | 'assistant';
+  content: string;
+  timestamp: string;  // Made timestamp required
 }
 
-// Convert backend message format to frontend format
-const convertToFrontendMessage = (backendMessage: ChatResponse): ChatMessage[] => {
-  return [
-    // User message
-    {
-      text: backendMessage.content,
-      isUser: true
-    },
-    // Bot response
-    {
-      text: backendMessage.response,
-      isUser: false
-    }
-  ];
-};
+interface ChatResponse {
+  response: string;
+}
+
+interface ChatSession {
+  id: string;
+  title: string;
+  messages: ChatMessage[];
+  created_at: string;
+  updated_at: string;
+}
 
 export default function ChatbotPage() {
-  const [message, setMessage] = useState('');
-  const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
   const [isThinking, setIsThinking] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [chatSessions, setChatSessions] = useState<ChatSession[]>([]);
-  const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
-  // Load chat history when component mounts
-  useEffect(() => {
-    const loadChatHistory = async () => {
-      try {
-        const history = await chatService.getChatHistory();
-        
-        // Group messages into sessions by date
-        const sessions: ChatSession[] = [];
-        history.forEach(message => {
-          const messageDate = new Date(message.created_at).toDateString();
-          let session = sessions.find(s => new Date(s.createdAt).toDateString() === messageDate);
-          
-          if (!session) {
-            session = {
-              id: messageDate,
-              messages: [],
-              createdAt: message.created_at
-            };
-            sessions.push(session);
-          }
-          
-          session.messages.push(message);
-        });
-
-        // Sort sessions by date (newest first)
-        sessions.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-        
-        setChatSessions(sessions);
-        
-        // If there are sessions, load the most recent one
-        if (sessions.length > 0) {
-          const latestSession = sessions[0];
-          setCurrentSessionId(latestSession.id);
-          setChatHistory(latestSession.messages.flatMap(convertToFrontendMessage));
-        }
-      } catch (error) {
-        console.error('Failed to load chat history:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadChatHistory();
-  }, []);
-
-  const handleSessionSelect = (sessionId: string) => {
-    const session = chatSessions.find(s => s.id === sessionId);
-    if (session) {
-      setCurrentSessionId(sessionId);
-      setChatHistory(session.messages.flatMap(convertToFrontendMessage));
+  // Mock chat history data for UI demonstration
+  const mockChatSessions: ChatSession[] = [
+    {
+      id: '1',
+      title: 'Understanding React Hooks',
+      messages: [
+        { role: 'user', content: 'Can you explain React hooks?', timestamp: '2024-03-20T10:00:00Z' },
+        { role: 'assistant', content: 'React Hooks are functions that allow you to use state and other React features in functional components...', timestamp: '2024-03-20T10:00:05Z' }
+      ],
+      created_at: '2024-03-20T10:00:00Z',
+      updated_at: '2024-03-20T10:05:00Z'
+    },
+    {
+      id: '2',
+      title: 'Python Data Structures',
+      messages: [
+        { role: 'user', content: 'What are the main Python data structures?', timestamp: '2024-03-19T15:00:00Z' },
+        { role: 'assistant', content: 'Python has several built-in data structures including lists, tuples, dictionaries, and sets...', timestamp: '2024-03-19T15:00:05Z' }
+      ],
+      created_at: '2024-03-19T15:00:00Z',
+      updated_at: '2024-03-19T15:10:00Z'
     }
-  };
+  ];
 
-  const startNewChat = () => {
-    setCurrentSessionId(null);
-    setChatHistory([]);
-  };
+  // Auto scroll to bottom when new messages arrive
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [messages, isThinking]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const currentMessage = message.trim();
-    if (!currentMessage && !selectedImage) return;
+    if (!input.trim() || isLoading) return;
 
-    // Clear input immediately
-    setMessage('');
-    setSelectedImage(null);
-
-    // Add user's message to chat history immediately
-    const userMessage = { text: currentMessage, isUser: true };
-    if (selectedImage) {
-      userMessage.image = URL.createObjectURL(selectedImage);
-    }
-    setChatHistory(prev => [...prev, userMessage]);
-
-    // Show thinking animation
-    setIsThinking(true);
-
+    setIsLoading(true);
+    
     try {
-      // Send message to backend
-      const response = await chatService.sendMessage(currentMessage);
-      
-      // Add bot's response to chat history
-      setChatHistory(prev => [...prev, { 
-        text: response.response,
-        isUser: false 
-      }]);
-
-      // Update sessions with the new message
-      const today = new Date().toDateString();
-      const updatedSessions = [...chatSessions];
-      let todaySession = updatedSessions.find(s => new Date(s.createdAt).toDateString() === today);
-
-      if (!todaySession) {
-        todaySession = {
-          id: today,
-          messages: [],
-          createdAt: new Date().toISOString()
+        // Add user message to UI immediately
+        const newMessage: ChatMessage = {
+            content: input,
+            role: 'user',
+            timestamp: new Date().toISOString()
         };
-        updatedSessions.unshift(todaySession);
-      }
+        setMessages(prev => [...prev, newMessage]);
+        setInput('');
+        setIsThinking(true);
 
-      todaySession.messages.push(response);
-      setChatSessions(updatedSessions);
-      setCurrentSessionId(todaySession.id);
+        // Send message to backend
+        const formData = new FormData();
+        formData.append('message', input);
+        
+        if (selectedImage) {
+            formData.append('image', selectedImage);
+        }
+
+        const response = await fetch(API_ENDPOINTS.CHAT, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            },
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to send message');
+        }
+
+        const data = await response.json();
+        
+        // Add assistant's response to messages
+        const assistantMessage: ChatMessage = {
+            content: data.response,
+            role: 'assistant',
+            timestamp: new Date().toISOString()
+        };
+
+        setMessages(prev => [...prev, assistantMessage]);
+        
+        // Clear image preview and file after sending
+        setSelectedImage(null);
+        setImagePreview(null);
+        
     } catch (error) {
-      console.error('Failed to send message:', error);
-      setChatHistory(prev => [...prev, { 
-        text: "Sorry, I encountered an error. Please try again.",
-        isUser: false 
-      }]);
+        console.error('Error sending message:', error);
+        // Add error message to chat
+        const errorMessage: ChatMessage = {
+            content: 'Sorry, there was an error processing your message. Please try again.',
+            role: 'assistant',
+            timestamp: new Date().toISOString()
+        };
+        setMessages(prev => [...prev, errorMessage]);
     } finally {
-      setIsThinking(false);
+        setIsLoading(false);
+        setIsThinking(false);
     }
-  };
+};
 
   const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       setSelectedImage(file);
+      const previewUrl = URL.createObjectURL(file);
+      setImagePreview(previewUrl);
     }
   };
 
+  useEffect(() => {
+    return () => {
+      if (imagePreview) {
+        URL.revokeObjectURL(imagePreview);
+      }
+    };
+  }, [imagePreview]);
+
+  // Mock functions for chat history UI
+  const handleSessionSelect = (sessionId: string) => {
+    // This is just for show, no real functionality needed
+    console.log('Selected session:', sessionId);
+  };
+
+  const startNewChat = () => {
+    setMessages([]);
+  };
+
+  const handleDeleteSession = (sessionId: string) => {
+    // This is just for show, no real functionality needed
+    console.log('Delete session:', sessionId);
+  };
+
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className={styles.container}>
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
       
-      <div className="flex-1 p-6 relative">
-        <div className="max-w-6xl w-full mx-auto flex flex-col">
+      {/* Hamburger Menu Button - Absolute Positioned */}
+      <button
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+        className={`fixed top-4 left-4 p-2 hover:bg-gray-100 rounded-lg transition-all z-50 ${
+          isSidebarOpen 
+            ? 'bg-purple-100 text-purple-600 shadow-lg translate-x-1' 
+            : 'bg-white text-gray-600 shadow-md'
+        }`}
+        aria-label={isSidebarOpen ? 'Close menu' : 'Open menu'}
+      >
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          {isSidebarOpen ? (
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
+          ) : (
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          )}
+        </svg>
+      </button>
+
+      <div className="flex-1 flex items-center justify-center p-6">
+        <div className="w-full max-w-4xl flex flex-col h-[90vh] translate-y-[-2rem] translate-x-8">
           {/* Chat Container */}
-          <div className="flex-1 bg-white rounded-2xl shadow-lg p-6 mb-4 overflow-hidden flex flex-col">
-            {/* Header with Hamburger and History Toggle */}
-            <div className="flex items-center justify-between mb-6 border-b pb-4">
-              <button
-                onClick={() => setIsSidebarOpen(true)}
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                <svg
-                  className="w-6 h-6 text-gray-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              </button>
-              <h1 className="text-4xl font-bold" style={{ color: '#8A2BE2' }}>Learning Buddy ✨</h1>
-              <button
-                onClick={() => setIsHistoryOpen(!isHistoryOpen)}
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                <svg
-                  className="w-6 h-6 text-gray-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </button>
+          <div className={styles.chatbox}>
+            <div className={styles.header}>
+              <h1>Learning Buddy ✨</h1>
             </div>
 
-            <div className="flex flex-1 overflow-hidden">
-              {/* Main Chat Area */}
-              <div className="flex-1 flex flex-col overflow-hidden">
-                {/* Chat Messages */}
-                <div className="flex-1 overflow-y-auto mb-4 space-y-4">
-                  {isLoading ? (
-                    <div className="flex justify-center items-center h-full">
-                      <div className="flex items-center space-x-2">
-                        <div className="w-3 h-3 bg-purple-600 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                        <div className="w-3 h-3 bg-purple-600 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                        <div className="w-3 h-3 bg-purple-600 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
-                      </div>
-                    </div>
-                  ) : (
-                    <>
-                      {chatHistory.map((chat, index) => (
-                        <div
-                          key={index}
-                          className={`flex ${chat.isUser ? 'justify-end' : 'justify-start'}`}
-                        >
-                          <div
-                            className={`max-w-[70%] rounded-2xl p-4 ${
-                              chat.isUser
-                                ? 'bg-purple-600 text-white'
-                                : 'bg-gray-100 text-gray-800'
-                            }`}
-                          >
-                            {chat.image && (
-                              <div className="mb-2">
-                                <img 
-                                  src={chat.image} 
-                                  alt="Uploaded content"
-                                  className="max-w-full rounded-lg"
-                                  style={{ maxHeight: '200px' }}
-                                />
-                              </div>
-                            )}
-                            <div className="prose prose-sm max-w-none">
-                              <ReactMarkdown 
-                                remarkPlugins={[remarkGfm]}
-                                components={{
-                                  // Override default link styling
-                                  a: ({children, ...props}) => (
-                                    <a 
-                                      {...props} 
-                                      className={`${chat.isUser ? 'text-white' : 'text-blue-600'} underline`}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                    >
-                                      {children}
-                                    </a>
-                                  ),
-                                  // Override default code block styling
-                                  code: ({children, className, ...props}) => (
-                                    <code
-                                      {...props}
-                                      className={`${
-                                        !className
-                                          ? `${chat.isUser ? 'bg-purple-700' : 'bg-gray-200'} rounded px-1`
-                                          : `${chat.isUser ? 'bg-purple-700' : 'bg-gray-200'} block p-2 rounded`
-                                      }`}
-                                    >
-                                      {children}
-                                    </code>
-                                  ),
-                                  // Override default list styling
-                                  ul: ({children, ...props}) => (
-                                    <ul {...props} className="list-disc list-inside">
-                                      {children}
-                                    </ul>
-                                  ),
-                                  ol: ({children, ...props}) => (
-                                    <ol {...props} className="list-decimal list-inside">
-                                      {children}
-                                    </ol>
-                                  ),
-                                }}
-                              >
-                                {chat.text}
-                              </ReactMarkdown>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                      
-                      {/* Thinking Animation */}
-                      {isThinking && (
-                        <div className="flex justify-start">
-                          <div className="bg-gray-100 rounded-2xl p-4 flex items-center space-x-2">
-                            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
-                          </div>
-                        </div>
-                      )}
-                    </>
-                  )}
+            <div className={styles.messageContainer} ref={chatContainerRef}>
+              {messages.map((message, index) => (
+                <div
+                  key={index}
+                  className={`${styles.messageWrapper} ${
+                    message.role === 'user' ? styles.userMessage : styles.botMessage
+                  }`}
+                >
+                  <div className={styles.message}>
+                    <ReactMarkdown 
+                      remarkPlugins={[remarkGfm]}
+                      components={{
+                        // Override default link behavior to open in new tab
+                        a: (props) => (
+                          <a target="_blank" rel="noopener noreferrer" {...props} />
+                        ),
+                      }}
+                    >
+                      {message.content}
+                    </ReactMarkdown>
+                  </div>
                 </div>
+              ))}
+              
+              {isThinking && (
+                <div className={`${styles.messageWrapper} ${styles.botMessage}`}>
+                  <div className={styles.thinking}>
+                    <div className={styles.dot}></div>
+                    <div className={styles.dot}></div>
+                    <div className={styles.dot}></div>
+                  </div>
+                </div>
+              )}
+            </div>
 
-                {/* Message Input */}
-                <form onSubmit={handleSubmit} className="flex gap-2">
-                  <input
-                    type="text"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Type your message..."
-                    className="flex-1 border border-gray-300 rounded-full px-6 py-3 focus:outline-none focus:border-purple-500"
-                    disabled={isLoading} // Disable input while loading
-                  />
-                  <label className={`cursor-pointer bg-gray-200 hover:bg-gray-300 rounded-full px-4 py-3 flex items-center transition-colors ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}>
+            <div className={styles.inputContainer}>
+              <form onSubmit={handleSubmit}>
+                <div className={styles.inputWrapper}>
+                  <div className={styles.inputWithPreview}>
+                    {imagePreview && (
+                      <div className={styles.imageAddedLabel}>
+                        Image added
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setSelectedImage(null);
+                            setImagePreview(null);
+                          }}
+                        >
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      </div>
+                    )}
+                    <input
+                      type="text"
+                      value={input}
+                      onChange={(e) => setInput(e.target.value)}
+                      placeholder="Type your message..."
+                      disabled={isLoading}
+                    />
+                  </div>
+                  <label className={styles.imageButton}>
                     <input
                       type="file"
                       accept="image/*"
@@ -332,31 +288,34 @@ export default function ChatbotPage() {
                       className="hidden"
                       disabled={isLoading}
                     />
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                   </label>
-                  <button
-                    type="submit"
-                    className="bg-purple-600 text-white rounded-full px-8 py-3 hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    disabled={isLoading || isThinking}
-                  >
-                    Send
-                  </button>
-                </form>
-              </div>
+                </div>
+                <button
+                  type="submit"
+                  className={styles.sendButton}
+                  disabled={!input.trim() || isLoading}
+                >
+                  Send
+                </button>
+              </form>
             </div>
           </div>
         </div>
 
         <ChatHistoryPanel
-          sessions={chatSessions}
+          sessions={mockChatSessions}
           isOpen={isHistoryOpen}
           onSessionSelect={handleSessionSelect}
           onNewChat={startNewChat}
-          currentSessionId={currentSessionId}
+          currentSessionId="1"
+          onClose={() => setIsHistoryOpen(false)}
+          onOpen={() => setIsHistoryOpen(true)}
+          onDeleteSession={handleDeleteSession}
         />
       </div>
     </div>
   );
-} 
+}
