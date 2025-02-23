@@ -8,6 +8,10 @@ import schemas
 import auth
 import chatbot
 from database import engine, get_db
+import json
+from typing import List, Optional
+import google.generativeai as genai
+from datetime import datetime
 
 # Create the database tables
 models.Base.metadata.create_all(bind=engine)
@@ -22,6 +26,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Load mock subjects
+with open("backend/mock_subjects.json") as f:
+    MOCK_SUBJECTS = json.load(f)
+
+# Configure Gemini
+genai.configure(api_key='YOUR_GEMINI_API_KEY')
+model = genai.GenerativeModel('gemini-pro')
 
 @app.post("/signup", response_model=schemas.User)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
@@ -183,4 +195,82 @@ async def get_chat_history(
     messages = db.query(models.ChatMessage).filter(
         models.ChatMessage.user_id == current_user.id
     ).order_by(models.ChatMessage.created_at.desc()).all()
-    return messages 
+    return messages
+
+@app.get("/subjects", response_model=List[schemas.Subject])
+def get_subjects(
+    search: Optional[str] = None,
+    category: Optional[str] = None,
+    db: Session = Depends(get_db)
+):
+    query = db.query(models.Subject)
+    
+    if search:
+        query = query.filter(models.Subject.name.ilike(f"%{search}%"))
+    if category:
+        query = query.filter(models.Subject.category == category)
+    
+    return query.all()
+
+@app.get("/subjects/{subject_id}/tutorial", response_model=schemas.Tutorial)
+async def get_tutorial(
+    subject_id: int,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(auth.get_current_user)
+):
+    # Get subject
+    subject = db.query(models.Subject).filter(models.Subject.id == subject_id).first()
+    if not subject:
+        raise HTTPException(status_code=404, detail="Subject not found")
+    
+    # Check if tutorial exists
+    tutorial = db.query(models.Tutorial).filter(models.Tutorial.subject_id == subject_id).first()
+    
+    if not tutorial:
+        # Generate tutorial content using AI
+        prompt = f"Create a detailed tutorial about {subject.name}. Include key concepts, examples, and explanations."
+        response = await model.generate_content(prompt)
+        content = response.text
+        
+        # Generate visual aids using Gemini
+        visual_prompt = f"Find educational resources for {subject.name}. Include YouTube videos, interactive websites, and visual aids."
+        visual_response = await model.generate_content(visual_prompt)
+        visual_aids = visual_response.text
+        
+        # Create new tutorial
+        tutorial = models.Tutorial(
+            subject_id=subject_id,
+            title=f"Tutorial: {subject.name}",
+            content=content,
+            difficulty_level="Intermediate",
+            visual_aids=json.dumps({"resources": visual_aids})
+        )
+        db.add(tutorial)
+        db.commit()
+        db.refresh(tutorial)
+    
+    # Record view history
+    history = models.UserTutorialHistory(
+        user_id=current_user.id,
+        tutorial_id=tutorial.id
+    )
+    db.add(history)
+    
+    # Update last viewed timestamp
+    tutorial.last_viewed_at = datetime.utcnow()
+    db.commit()
+    
+    return tutorial
+
+@app.get("/user/tutorial-history", response_model=List[schemas.Tutorial])
+def get_user_tutorial_history(
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(auth.get_current_user)
+):
+    history = db.query(models.Tutorial).\
+        join(models.UserTutorialHistory).\
+        filter(models.UserTutorialHistory.user_id == current_user.id).\
+        order_by(models.UserTutorialHistory.viewed_at.desc()).\
+        all()
+    
+    return history 

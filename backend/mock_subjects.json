@@ -1,0 +1,46 @@
+{
+  "subjects": [
+    {
+      "id": 1,
+      "name": "Introduction to Calculus",
+      "category": "Mathematics",
+      "subcategory": "Calculus",
+      "description": "Basic concepts of limits, derivatives, and integrals"
+    },
+    {
+      "id": 2,
+      "name": "Newton's Laws of Motion",
+      "category": "Physics",
+      "subcategory": "Classical Mechanics",
+      "description": "Fundamental principles of motion and forces"
+    },
+    {
+      "id": 3,
+      "name": "Chemical Bonding",
+      "category": "Chemistry",
+      "subcategory": "General Chemistry",
+      "description": "Understanding atomic bonds and molecular structures"
+    },
+    {
+      "id": 4,
+      "name": "Cell Biology",
+      "category": "Biology",
+      "subcategory": "Cellular Biology",
+      "description": "Study of cell structure and function"
+    },
+    {
+      "id": 5,
+      "name": "Linear Algebra",
+      "category": "Mathematics",
+      "subcategory": "Algebra",
+      "description": "Vectors, matrices, and linear transformations"
+    },
+    {
+      "id": 6,
+      "name": "Quantum Mechanics",
+      "category": "Physics",
+      "subcategory": "Modern Physics",
+      "description": "Introduction to quantum theory and wave functions"
+    }
+  ]
+} 
