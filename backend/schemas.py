@@ -1,6 +1,6 @@
 from pydantic import BaseModel, EmailStr
 from typing import Optional, List
-from datetime import datetime
+from datetime import datetime, date
 
 class UserBase(BaseModel):
     username: str
@@ -98,4 +98,20 @@ class UserTutorialHistory(BaseModel):
     viewed_at: datetime
 
     class Config:
-        from_attributes = True 
+        from_attributes = True
+
+class TimeSpentRecord(BaseModel):
+    id: int
+    user_id: int
+    date: date
+    total_seconds: int
+    hours: int
+    minutes: int
+    seconds: int
+
+    class Config:
+        from_attributes = True
+
+class WeeklyTimeReport(BaseModel):
+    days: List[TimeSpentRecord]
+    total_hours: float 

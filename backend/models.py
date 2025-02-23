@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, Text, DateTime
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, Text, DateTime, Boolean, Date
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
@@ -82,4 +82,15 @@ class UserTutorialHistory(Base):
     
     # Relationships
     user = relationship("User", backref="tutorial_history")
-    tutorial = relationship("Tutorial", back_populates="user_history") 
+    tutorial = relationship("Tutorial", back_populates="user_history")
+
+class TimeSpentRecord(Base):
+    __tablename__ = "time_spent_records"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    date = Column(Date, default=datetime.utcnow().date)
+    total_seconds = Column(Integer, default=0)
+    
+    # Relationship with User
+    user = relationship("User", backref="time_spent_records") 

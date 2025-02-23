@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import timedelta, datetime, date
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi.middleware.cors import CORSMiddleware
@@ -11,7 +11,6 @@ from database import engine, get_db
 import json
 from typing import List, Optional
 import google.generativeai as genai
-from datetime import datetime
 
 # Create the database tables
 models.Base.metadata.create_all(bind=engine)
@@ -28,7 +27,7 @@ app.add_middleware(
 )
 
 # Load mock subjects
-with open("backend/mock_subjects.json") as f:
+with open("backend/subjects.json") as f:
     MOCK_SUBJECTS = json.load(f)
 
 # Configure Gemini
@@ -273,4 +272,86 @@ def get_user_tutorial_history(
         order_by(models.UserTutorialHistory.viewed_at.desc()).\
         all()
     
-    return history 
+    return history
+
+@app.post("/pomodoro/active", response_model=schemas.TimeSpentRecord)
+async def update_active_time(
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(auth.get_current_user)
+):
+    # Get or create today's time record
+    today = datetime.utcnow().date()
+    time_record = db.query(models.TimeSpentRecord).filter(
+        models.TimeSpentRecord.user_id == current_user.id,
+        models.TimeSpentRecord.date == today
+    ).first()
+    
+    if not time_record:
+        time_record = models.TimeSpentRecord(
+            user_id=current_user.id,
+            date=today,
+            total_seconds=0
+        )
+        db.add(time_record)
+    
+    # Add 30 seconds to total time
+    time_record.total_seconds += 30
+    
+    # Calculate hours, minutes, seconds
+    hours = time_record.total_seconds // 3600
+    minutes = (time_record.total_seconds % 3600) // 60
+    seconds = time_record.total_seconds % 60
+    
+    db.commit()
+    db.refresh(time_record)
+    
+    return schemas.TimeSpentRecord(
+        id=time_record.id,
+        user_id=time_record.user_id,
+        date=time_record.date,
+        total_seconds=time_record.total_seconds,
+        hours=hours,
+        minutes=minutes,
+        seconds=seconds
+    )
+
+@app.get("/time-spent/weekly", response_model=schemas.WeeklyTimeReport)
+async def get_weekly_time_report(
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(auth.get_current_user)
+):
+    # Calculate date range for the past week
+    end_date = datetime.utcnow().date()
+    start_date = end_date - timedelta(days=6)
+    
+    # Get records for the past week
+    records = db.query(models.TimeSpentRecord).filter(
+        models.TimeSpentRecord.user_id == current_user.id,
+        models.TimeSpentRecord.date >= start_date,
+        models.TimeSpentRecord.date <= end_date
+    ).all()
+    
+    # Process records
+    days = []
+    total_seconds = 0
+    
+    for record in records:
+        total_seconds += record.total_seconds
+        hours = record.total_seconds // 3600
+        minutes = (record.total_seconds % 3600) // 60
+        seconds = record.total_seconds % 60
+        
+        days.append(schemas.TimeSpentRecord(
+            id=record.id,
+            user_id=record.user_id,
+            date=record.date,
+            total_seconds=record.total_seconds,
+            hours=hours,
+            minutes=minutes,
+            seconds=seconds
+        ))
+    
+    return schemas.WeeklyTimeReport(
+        days=days,
+        total_hours=round(total_seconds / 3600, 2)
+    ) 
