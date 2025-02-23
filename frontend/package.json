@@ -11,13 +11,25 @@
   "dependencies": {
     "@types/axios": "^0.9.36",
     "axios": "^1.7.9",
-    "next": "^14.1.0",
+    "buffer": "^6.0.3",
+    "clsx": "^2.1.1",
+    "crypto-browserify": "^3.12.1",
+    "date-fns": "^4.1.0",
+    "lucide-react": "^0.475.0",
+    "next": "^15.1.7",
+    "next-themes": "^0.4.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hot-toast": "^2.5.2"
+    "react-hot-toast": "^2.5.2",
+    "react-markdown": "^10.0.0",
+    "remark-gfm": "^4.0.1",
+    "stream-browserify": "^3.0.0",
+    "tailwind-merge": "^3.0.2",
+    "util": "^0.12.5"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
+    "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^20.11.19",
     "@types/react": "^18.2.57",
     "@types/react-dom": "^18.2.19",

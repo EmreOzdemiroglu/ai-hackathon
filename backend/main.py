@@ -1,12 +1,16 @@
 from datetime import timedelta
-from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi import FastAPI, Depends, HTTPException, status, UploadFile, Form, File
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 import models
 import schemas
 import auth
+import chatbot
 from database import engine, get_db
+from typing import Optional
+from fastapi.responses import JSONResponse
+from chatbot import get_chat_response, UserProfile
 
 # Create the database tables
 models.Base.metadata.create_all(bind=engine)
@@ -142,4 +146,81 @@ def delete_learning_profile(
     
     db.delete(profile)
     db.commit()
-    return {"message": "Learning profile deleted successfully"} 
+    return {"message": "Learning profile deleted successfully"}
+
+@app.post("/api/chat/sessions")
+async def create_session(
+    title: str = "New Chat",
+    user_id: str = Form("default_user")
+):
+    """Create a new chat session"""
+    try:
+        session = chatbot.create_chat_session(user_id, title)
+        return session
+    except Exception as e:
+        print(f"Error creating session: {e}")
+        return JSONResponse(
+            status_code=500,
+            content={"error": "Failed to create session"}
+        )
+
+@app.get("/chat/history")
+async def get_history(current_user: models.User = Depends(auth.get_current_user)):
+    """Get all chat history for the current user"""
+    history = chatbot.get_chat_history(str(current_user.id))
+    return history
+
+@app.post("/chat")
+async def chat(
+    message: str = Form(...),
+    image: Optional[UploadFile] = File(None),
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(auth.get_current_user)
+):
+    try:
+        # Get user's learning profile
+        profile = db.query(models.LearningProfile).filter(
+            models.LearningProfile.user_id == current_user.id
+        ).first()
+
+        # Convert profile to UserProfile if it exists
+        user_profile = None
+        if profile:
+            user_profile = UserProfile(
+                verbal_score=profile.verbal_score,
+                non_verbal_score=profile.non_verbal_score,
+                self_assessment=profile.self_assessment,
+                age=profile.age
+            )
+
+        # Process image if provided
+        image_data = None
+        if image:
+            image_data = await image.read()
+
+        # Get response from chatbot
+        response = await get_chat_response(
+            user_query=message,
+            user_profile=user_profile,
+            image_data=image_data
+        )
+
+        return {"response": response}
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=str(e)
+        )
+
+@app.delete("/chat/sessions/{session_id}")
+async def delete_session(
+    session_id: str,
+    current_user: models.User = Depends(auth.get_current_user)
+):
+    """Delete a chat session"""
+    success = chatbot.delete_chat_session(str(current_user.id), session_id)
+    return {"status": "success" if success else "failed"}
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000) 
