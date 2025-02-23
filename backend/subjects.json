@@ -2820,6 +2820,13 @@
         "category": "Mathematics",
         "subcategory": "Calculus",
         "description": "Calculating definite integrals and their applications (area, etc.)."
+      },
+      {
+        "id": 404,
+        "name": "Introduction to Quantum Mechanics",
+        "category": "Science", 
+        "subcategory": "Physics",
+        "description": "Basic concepts of quantum mechanics including wave functions and probability."
       }
     ]
   }

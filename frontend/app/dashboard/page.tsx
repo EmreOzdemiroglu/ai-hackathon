@@ -7,12 +7,14 @@ import { useTheme } from 'next-themes';
 import learningImage from '../assets/images/Learning-cuate.png';
 import Sidebar from '../components/Sidebar';
 import PomodoroTimer from '../components/PomodoroTimer';
+import { useUser } from '../hooks/useUser';
 
 export default function Dashboard() {
   const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false);
   const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false);
   const [timeFilter, setTimeFilter] = useState('week');
   const { theme, setTheme } = useTheme();
+  const { user, loading } = useUser();
   
   const recentTopics = [
     { id: 1, title: 'Technology', progress: 25 },
@@ -69,7 +71,9 @@ export default function Dashboard() {
         <div className="m-6 p-8 bg-pink-50 dark:bg-pink-900/20 rounded-xl">
           <div className="flex justify-between items-center">
             <div>
-              <h2 className="text-4xl font-semibold mb-4 text-pink-500 dark:text-pink-300">Welcome back Anna!</h2>
+              <h2 className="text-4xl font-semibold mb-4 text-pink-500 dark:text-pink-300">
+                {loading ? 'Loading...' : `Welcome back ${user?.username ? user.username.charAt(0).toUpperCase() + user.username.slice(1) : 'Guest'}!`}
+              </h2>
               <p className="text-xl text-gray-600 dark:text-gray-400">
                 You've learned 80% of your goal this week!<br />
                 Keep it up and improve your results!
@@ -171,7 +175,9 @@ export default function Dashboard() {
                 className="object-cover"
               />
             </div>
-            <h3 className="text-2xl font-semibold dark:text-white mb-2">Anna Morrison</h3>
+            <h3 className="text-2xl font-semibold dark:text-white mb-2">
+              {loading ? 'Loading...' : user?.username ? user.username.charAt(0).toUpperCase() + user.username.slice(1) : 'Guest'}
+            </h3>
             <p className="text-xl text-gray-500 dark:text-gray-400">Student</p>
             
             <div className="w-full mt-12">
