@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import learningImage from '../assets/images/Learning-cuate.png';
 import Sidebar from '../components/Sidebar';
+import PomodoroTimer from '../components/PomodoroTimer';
 
 export default function Dashboard() {
   const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false);
@@ -34,7 +35,7 @@ export default function Dashboard() {
   return (
     <div className="flex min-h-screen bg-white dark:bg-gray-900">
       {/* Left Sidebar */}
-      <Sidebar isOpen={isLeftSidebarOpen} />
+      <Sidebar isOpen={isLeftSidebarOpen} onClose={() => setIsLeftSidebarOpen(false)} />
 
       {/* Main Content */}
       <div className={`flex-1 transition-all duration-300 ease-in-out ${isLeftSidebarOpen ? 'ml-96' : 'ml-0'} ${isRightSidebarOpen ? 'mr-96' : 'mr-0'}`}>
@@ -83,6 +84,11 @@ export default function Dashboard() {
               />
             </div>
           </div>
+        </div>
+
+        {/* Pomodoro Timer */}
+        <div className="mx-6 mb-6">
+          <PomodoroTimer />
         </div>
 
         {/* Main Dashboard Content */}
@@ -184,4 +190,4 @@ export default function Dashboard() {
       </div>
     </div>
   );
-} 
+}
