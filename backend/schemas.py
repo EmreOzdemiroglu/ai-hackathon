@@ -114,4 +114,14 @@ class TimeSpentRecord(BaseModel):
 
 class WeeklyTimeReport(BaseModel):
     days: List[TimeSpentRecord]
-    total_hours: float 
+    total_hours: float
+
+class SubjectCategoryScore(BaseModel):
+    mathematics: float
+    biology: float
+    physics: float
+    geometry: float
+    chemistry: float
+
+    class Config:
+        from_attributes = True 
