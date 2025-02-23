@@ -6,3 +6,5 @@ pydantic
 python-multipart
 google-generativeai
 python-dotenv
+Pillow  # For image processing
+aiofiles  # For async file handling
