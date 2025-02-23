@@ -4,3 +4,5 @@ sqlalchemy
 python-jose[cryptography]
 pydantic
 python-multipart
+google-generativeai
+python-dotenv
