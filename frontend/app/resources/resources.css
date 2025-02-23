@@ -1,0 +1,27 @@
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #e9d5ff;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #d8b4fe;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+/* Firefox için scrollbar stili */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #e9d5ff transparent;
+} 
