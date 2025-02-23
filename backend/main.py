@@ -11,6 +11,7 @@ from database import engine, get_db
 import json
 from typing import List, Optional
 import google.generativeai as genai
+import re
 
 # Create the database tables
 models.Base.metadata.create_all(bind=engine)
@@ -27,12 +28,12 @@ app.add_middleware(
 )
 
 # Load mock subjects
-with open("backend/subjects.json") as f:
+with open("subjects.json") as f:
     MOCK_SUBJECTS = json.load(f)
 
 # Configure Gemini
 genai.configure(api_key='YOUR_GEMINI_API_KEY')
-model = genai.GenerativeModel('gemini-pro')
+model = genai.GenerativeModel('gemini-2.0-flash')
 
 @app.post("/signup", response_model=schemas.User)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
@@ -354,4 +355,72 @@ async def get_weekly_time_report(
     return schemas.WeeklyTimeReport(
         days=days,
         total_hours=round(total_seconds / 3600, 2)
-    ) 
+    )
+
+@app.get("/user/subject-analysis", response_model=schemas.SubjectCategoryScore)
+async def analyze_subject_interests(
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(auth.get_current_user)
+):
+    # Get latest 100 chat messages
+    messages = db.query(models.ChatMessage).filter(
+        models.ChatMessage.user_id == current_user.id
+    ).order_by(models.ChatMessage.created_at.desc()).limit(100).all()
+    
+    if not messages:
+        return schemas.SubjectCategoryScore(
+            mathematics=20.0,
+            biology=20.0,
+            physics=20.0,
+            geometry=20.0,
+            chemistry=20.0
+        )
+    
+    # Prepare chat history for analysis
+    chat_history = "\n".join([
+        f"User: {msg.content}\nResponse: {msg.response}"
+        for msg in messages
+    ])
+    
+    # Create prompt for Gemini
+    prompt = """Analyze the following chat history and classify the content into these categories:
+    - Mathematics
+    - Biology
+    - Physics
+    - Geometry
+    - Chemistry
+
+    Provide ONLY the percentage distribution (adding up to 100%) in this exact format:
+    Mathematics: X%
+    Biology: X%
+    Physics: X%
+    Geometry: X%
+    Chemistry: X%
+
+    Chat History:
+    """ + chat_history
+    
+    # Get analysis from Gemini
+    response = await model.generate_content(prompt)
+    analysis_text = response.text
+    
+    # Parse percentages using regex
+    pattern = r"(\w+):\s*(\d+(?:\.\d+)?)%"
+    matches = re.findall(pattern, analysis_text)
+    
+    # Convert to dictionary
+    scores = {}
+    for category, percentage in matches:
+        scores[category.lower()] = float(percentage)
+    
+    # Ensure all categories are present with at least 0%
+    default_categories = {
+        "mathematics": 0.0,
+        "biology": 0.0,
+        "physics": 0.0,
+        "geometry": 0.0,
+        "chemistry": 0.0
+    }
+    default_categories.update(scores)
+    
+    return schemas.SubjectCategoryScore(**default_categories) 
