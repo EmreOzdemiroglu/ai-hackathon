@@ -4,9 +4,10 @@ import Link from 'next/link';
 
 interface SidebarProps {
   isOpen: boolean;
+  onClose?: () => void;
 }
 
-export default function Sidebar({ isOpen }: SidebarProps) {
+export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const menuItems = [
     { label: 'Dashboard', href: '/dashboard', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
     { label: 'Flashcard', href: '/flashcard', icon: 'M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z' },
@@ -15,40 +16,49 @@ export default function Sidebar({ isOpen }: SidebarProps) {
   ];
 
   return (
-    <div className={`fixed inset-y-0 left-0 z-30 w-96 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-      <div className="p-8">
-        <div className="flex items-center justify-center mb-12">
-          <h2 className="text-4xl font-bold text-purple-600 dark:text-purple-400">VerbAI</h2>
-        </div>
-        <nav>
-          <ul className="space-y-4">
-            {menuItems.map((item) => (
-              <li key={item.label}>
-                <Link
-                  href={item.href}
-                  className="flex items-center p-4 text-xl text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
-                >
-                  <svg
-                    className="w-10 h-10 mr-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
+    <>
+      <div className={`fixed inset-y-0 left-0 z-30 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className="p-6">
+          <div className="flex items-center justify-center mb-8">
+            <h2 className="text-3xl font-bold text-purple-600">VerbAI</h2>
+          </div>
+          <nav>
+            <ul className="space-y-2">
+              {menuItems.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="flex items-center p-3 text-gray-700 rounded-lg hover:bg-purple-50 transition-colors duration-200"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d={item.icon}
-                    />
-                  </svg>
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+                    <svg
+                      className="w-6 h-6 mr-3 text-purple-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d={item.icon}
+                      />
+                    </svg>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
       </div>
-    </div>
+      {isOpen && (
+        <div 
+          onClick={onClose}
+          className="fixed inset-0 bg-black bg-opacity-50 z-20 cursor-pointer"
+          aria-hidden="true"
+        />
+      )}
+    </>
   );
 } 

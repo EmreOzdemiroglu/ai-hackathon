@@ -9,7 +9,7 @@ load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 # Initialize the model
-model = genai.GenerativeModel('gemini-pro')
+model = genai.GenerativeModel('gemini-2.0-flash')
 
 PLANNING_AGENT_PROMPT = """
 ROLE:
@@ -59,12 +59,11 @@ OBJECTIVES:
 GUIDELINES:
 * Focus on clarity and usefulness: the report should be actionable for the user.
 * Maintain a factual, yet empathetic tone—acknowledge the user's effort while guiding them forward.
-* Use structured, concise language (lists, short paragraphs) for readability.
+* Use structured, long language (lists, detailed paragraphs) for readability.
 * Thinking Steps That you need to do in order to understand fully:
 * Questions that you need to think about when you want to understand this fully:
 
-Recommended Actions:
-* Additional Related Question: ...
+Always add Additional Related Question in the end of the report:
 
 PLANNING AGENT OUTPUT: {planning_output}
 USER QUERY: {user_query}

@@ -22,7 +22,7 @@ export default function LoginPage() {
       await login({ username, password });
       toast.success('Login successful!');
       // Redirect to blank page after successful login
-      router.push('/blank');
+      router.push('/dashboard');
     } catch (error: any) {
       toast.error(error.response?.data?.detail || 'Login failed. Please try again.');
     } finally {
