@@ -1,13 +1,46 @@
 # Verb.AI
 **Verb.AI** is a personalized learning platform designed to help individuals with **verbal strengths and non-verbal deficits** leverage their cognitive profiles for effective learning. By scaffolding spatial and non-verbal tasks through verbal strategies, Verb.AI provides a tailored educational experience that adapts to each user's unique needs.
 ---
+
+## AI Hackathon Prompt
+
+
+
 ## Features
 - **Personalized Learning Profiles**: Assess users' verbal and non-verbal strengths to create adaptive learning paths.
 - **AI-Powered Chatbot**: A Gemini 2.0 Flash-powered chatbot that provides personalized feedback and guidance.
 - **Pomodoro Timer**: Track focused learning sessions with a built-in Pomodoro timer.
 - **Time-Spent Analytics**: Visualize daily and weekly learning progress with interactive bar charts.
 - **Adaptive Tasks**: Scaffold non-verbal tasks using verbal strategies based on user profiles.
-—
+## Images
+
+### Login Screen
+
+![image](https://github.com/user-attachments/assets/6b0d343a-d1e7-4633-91cc-2a839a5237d1)
+
+### Sign-up Screen
+![image](https://github.com/user-attachments/assets/5174d260-91a2-4ba7-8186-1d8740cf5e24)
+
+## Cognitive Profiling Test for Non-Verbal/Verbal Skills
+
+![image](https://github.com/user-attachments/assets/c63824f7-ac3d-4e73-a01c-b89e094e1bc1)
+![image](https://github.com/user-attachments/assets/8fc44270-cc7b-4bba-aad3-113133509120)
+
+## Dashboard, Pomodoro Timer with Navbar
+![image](https://github.com/user-attachments/assets/592ea9bc-2688-42b0-a329-b961ff8e7c50)
+![image](https://github.com/user-attachments/assets/604150d8-94cf-4abe-957a-a7d841a6e2c8)
+![image](https://github.com/user-attachments/assets/22f4e453-0d3a-4330-b0e1-a38265ebe67a)
+
+## Chatbot with Special Teaching Abilities Personalized for the Students
+
+![image](https://github.com/user-attachments/assets/0e8f3d2f-d92a-4e65-985b-c288fe35ad78)
+
+## Resources that Guides the Students
+
+![image](https://github.com/user-attachments/assets/46a35e40-9087-4405-bed9-85c612ffca08)
+
+
+
 ## Tech Stack
 ### Front-End
 - **Typescript**
