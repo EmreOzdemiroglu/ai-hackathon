@@ -1,12 +1,14 @@
 'use client';
 
-import { useState } from 'react';
-import { FaSearch, FaPlay, FaBookOpen } from 'react-icons/fa';
+import { useState, useEffect } from 'react';
+import { FaPlay, FaBookOpen } from 'react-icons/fa';
 import Sidebar from '../components/Sidebar';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import './resources.css';
 
-type Subject = 'Mathematics' | 'Science';
+type Subject = string;
 type Topics = {
   [K in Subject]: string[];
 };
@@ -21,15 +23,140 @@ type VideoLists = {
 };
 
 export default function ResourcesPage() {
-  const [selectedSubject, setSelectedSubject] = useState<Subject | ''>('');
-  const [selectedTopic, setSelectedTopic] = useState<string>('');
+  const [categories, setCategories] = useState<string[]>([]);
+  const [subcategories, setSubcategories] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [selectedSubcategory, setSelectedSubcategory] = useState<string>('');
+  const [explanation, setExplanation] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [authToken, setAuthToken] = useState<string>('');
   const [recentlyViewed, setRecentlyViewed] = useState<string[]>([
     'Math: Addition',
     'Science: Plants',
     'English: Verbs'
   ]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [isBrowseOpen, setIsBrowseOpen] = useState(false);
+
+  // Login and get token on component mount
+  useEffect(() => {
+    const login = async () => {
+      try {
+        const formData = new URLSearchParams();
+        formData.append('username', 'demo_user'); // Replace with actual credentials
+        formData.append('password', 'demo_password'); // Replace with actual credentials
+
+        const response = await fetch('http://localhost:8000/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error('Login failed');
+        }
+
+        const data = await response.json();
+        setAuthToken(data.access_token);
+      } catch (error) {
+        console.error('Login error:', error);
+      }
+    };
+
+    login();
+  }, []);
+
+  // Fetch categories on component mount
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/api/subjects/categories');
+        const data = await response.json();
+        setCategories(data);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+    fetchCategories();
+  }, []);
+
+  // Fetch subcategories when a category is selected
+  useEffect(() => {
+    const fetchSubcategories = async () => {
+      if (!selectedCategory) {
+        setSubcategories([]);
+        return;
+      }
+      try {
+        const response = await fetch(`http://localhost:8000/api/subjects/subcategories/${encodeURIComponent(selectedCategory)}`);
+        const data = await response.json();
+        setSubcategories(data);
+        // Reset selected subcategory when category changes
+        setSelectedSubcategory('');
+      } catch (error) {
+        console.error('Error fetching subcategories:', error);
+      }
+    };
+    fetchSubcategories();
+  }, [selectedCategory]);
+
+  // Modified useEffect for fetching explanation
+  useEffect(() => {
+    const fetchExplanation = async () => {
+      if (!selectedSubcategory || !authToken) {
+        setExplanation('');
+        return;
+      }
+
+      setIsLoading(true);
+      try {
+        // First try to get from cache
+        const cacheResponse = await fetch(`http://localhost:8000/api/cache/explanation/${encodeURIComponent(selectedSubcategory)}`);
+        const cacheData = await cacheResponse.json();
+
+        if (cacheData.explanation) {
+          setExplanation(cacheData.explanation);
+        } else {
+          // If not in cache, get from chat endpoint
+          const formData = new FormData();
+          formData.append('message', `I don't understand ${selectedSubcategory}. Can you explain it to me?`);
+
+          const chatResponse = await fetch('http://localhost:8000/chat', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${authToken}`,
+            },
+            body: formData,
+          });
+
+          if (!chatResponse.ok) {
+            throw new Error('Chat request failed');
+          }
+
+          const chatData = await chatResponse.json();
+
+          // Cache the response
+          await fetch(`http://localhost:8000/api/cache/explanation/${encodeURIComponent(selectedSubcategory)}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ explanation: chatData.response }),
+          });
+
+          setExplanation(chatData.response);
+        }
+      } catch (error) {
+        console.error('Error fetching explanation:', error);
+        setExplanation('Failed to load explanation. Please try again later.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchExplanation();
+  }, [selectedSubcategory, authToken]);
 
   const subjects: Topics = {
     Mathematics: ['Addition', 'Subtraction', 'Multiplication', 'Division'],
@@ -91,53 +218,12 @@ export default function ResourcesPage() {
     ]
   };
 
-  const handleSubjectSelect = (subject: Subject) => {
-    setSelectedSubject(subject);
-    if (subjects[subject]) {
-      setSelectedTopic(subjects[subject][0]);
-    }
-    setIsBrowseOpen(false);
-  };
-
   return (
     <div className="flex min-h-screen bg-gray-50">
       <Sidebar 
         isOpen={sidebarOpen} 
         onClose={() => setSidebarOpen(false)} 
       />
-
-      {/* Browse Modal */}
-      {isBrowseOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl p-8 max-w-4xl w-full mx-4 relative">
-            <button 
-              onClick={() => setIsBrowseOpen(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
-            >
-              <XMarkIcon className="w-6 h-6" />
-            </button>
-            
-            <h2 className="text-2xl font-bold mb-6">Browse Subjects</h2>
-            
-            <div className="grid grid-cols-2 gap-6">
-              {Object.keys(subjects).map((subject) => (
-                <div 
-                  key={subject}
-                  onClick={() => handleSubjectSelect(subject as Subject)}
-                  className="bg-white border-2 border-purple-100 rounded-xl p-6 cursor-pointer hover:border-purple-500 transition-colors"
-                >
-                  <h3 className="text-xl font-semibold text-purple-800 mb-2">{subject}</h3>
-                  <div className="space-y-2">
-                    {subjects[subject as Subject].map((topic) => (
-                      <p key={topic} className="text-gray-600">{topic}</p>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Main Content */}
       <div className={`flex-1 flex flex-col p-6 gap-6 transition-all duration-300 ${sidebarOpen ? 'md:ml-64' : ''}`}>
@@ -160,43 +246,37 @@ export default function ResourcesPage() {
         <div className="flex gap-8">
           {/* Left Sidebar - Browse Section */}
           <div className="w-[300px] flex-shrink-0 space-y-4">
-            {/* Search Bar */}
+            {/* Category Dropdown */}
             <div className="relative">
-              <input
-                type="text"
-                placeholder="Search topics..."
-                className="w-full p-3 pl-10 border rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-              />
-              <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="w-full p-3 border rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              >
+                <option value="">Select a Category</option>
+                {categories.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
             </div>
 
-            {/* Browse Button */}
-            <button 
-              onClick={() => setIsBrowseOpen(true)}
-              className="w-full bg-purple-600 text-white p-3 rounded-xl font-medium hover:bg-purple-700 transition-colors"
-            >
-              Browse
-            </button>
-
-            {/* Subject List */}
-            {selectedSubject && (
-              <div className="bg-white rounded-xl p-4">
-                <h3 className="font-medium text-purple-800 mb-3">{selectedSubject} Topics</h3>
-                <div className="space-y-1">
-                  {subjects[selectedSubject as Subject].map((topic) => (
-                    <button
-                      key={topic}
-                      className={`w-full text-left p-2 rounded-lg transition-colors ${
-                        selectedTopic === topic
-                          ? 'bg-purple-100 text-purple-700'
-                          : 'hover:bg-gray-50 text-gray-600'
-                      }`}
-                      onClick={() => setSelectedTopic(topic)}
-                    >
-                      {topic}
-                    </button>
+            {/* Subcategory Dropdown - Only show when category is selected */}
+            {selectedCategory && (
+              <div className="relative">
+                <select
+                  value={selectedSubcategory}
+                  onChange={(e) => setSelectedSubcategory(e.target.value)}
+                  className="w-full p-3 border rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                >
+                  <option value="">Select a Subcategory</option>
+                  {subcategories.map((subcategory) => (
+                    <option key={subcategory} value={subcategory}>
+                      {subcategory}
+                    </option>
                   ))}
-                </div>
+                </select>
               </div>
             )}
 
@@ -220,30 +300,37 @@ export default function ResourcesPage() {
           <div className="flex-1">
             {/* Topic Header */}
             <div className="mb-6">
-              {selectedSubject && (
+              {selectedCategory && (
                 <span className="inline-block bg-purple-100 text-purple-700 px-4 py-1 rounded-full text-sm font-medium mb-2">
-                  {selectedSubject}
+                  {selectedCategory}
                 </span>
               )}
               <h1 className="text-3xl font-bold text-gray-900">
-                {selectedSubject}: {selectedTopic}
+                {selectedCategory && selectedSubcategory 
+                  ? `${selectedCategory}: ${selectedSubcategory}`
+                  : 'Select a category and subcategory'}
               </h1>
             </div>
 
             {/* Content Card */}
             <div className="bg-white rounded-2xl p-8 shadow-sm">
-              {selectedSubject && selectedTopic ? (
+              {selectedCategory && selectedSubcategory ? (
                 <>
-                  <h2 className="text-2xl font-bold mb-4">Let's Learn {selectedTopic}!</h2>
-                  <p className="text-gray-600 text-lg mb-6">
-                    Hi there! Today we're going to learn about {selectedTopic.toLowerCase()}.
-                  </p>
-
-                  {/* Dynamic content based on selection */}
-                  {/* You can add more conditional content here */}
+                  <h2 className="text-2xl font-bold mb-4">Let's Learn {selectedSubcategory}!</h2>
+                  {isLoading ? (
+                    <div className="flex items-center justify-center py-8">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-500"></div>
+                    </div>
+                  ) : (
+                    <div className="prose prose-lg max-w-none prose-headings:text-purple-900 prose-a:text-purple-600 prose-strong:text-purple-900 prose-code:text-purple-800 prose-pre:bg-purple-50">
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                        {explanation}
+                      </ReactMarkdown>
+                    </div>
+                  )}
                 </>
               ) : (
-                <p className="text-gray-500">Please select a subject and topic to start learning.</p>
+                <p className="text-gray-500">Please select a category and subcategory to start learning.</p>
               )}
             </div>
           </div>
@@ -254,7 +341,7 @@ export default function ResourcesPage() {
               <h2 className="text-xl font-bold mb-6">Helpful Resources</h2>
               <div className="overflow-hidden">
                 <div className="space-y-6 h-[640px] overflow-y-auto pr-4 custom-scrollbar">
-                  {(videoLists[`${selectedSubject}: ${selectedTopic}`] || []).map((video, index) => (
+                  {(videoLists[`${selectedCategory}: ${selectedSubcategory}`] || []).map((video, index) => (
                     <div key={index} className="group">
                       <div className="bg-gray-100 rounded-xl aspect-video flex items-center justify-center mb-3 group-hover:bg-gray-200 transition-colors cursor-pointer">
                         <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center group-hover:bg-purple-700 transition-colors">
