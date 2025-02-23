@@ -1,5 +1,5 @@
 {
-  "name": "ai-hackathon",
+  "name": "frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,26 +9,34 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "@types/axios": "^0.9.36",
     "axios": "^1.7.9",
-    "clsx": "^2.1.1",
+    "clsx": "^2.1.0",
     "date-fns": "^4.1.0",
-    "lucide-react": "^0.475.0",
-    "next": "^14.1.0",
+    "lucide-react": "^0.330.0",
+    "next": "14.1.0",
     "next-themes": "^0.4.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^18",
+    "react-dom": "^18",
     "react-hot-toast": "^2.5.2",
+    "react-icons": "^5.5.0",
     "react-markdown": "^10.0.0",
     "remark-gfm": "^4.0.1",
-    "tailwind-merge": "^3.0.2"
+    "tailwind-merge": "^2.2.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/typography": "^0.5.16",
-    "@types/node": "^20.11.19",
-    "@types/react": "^18.2.57",
-    "@types/react-dom": "^18.2.19",
-    "typescript": "^5.3.3"
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.1.0",
+    "postcss": "^8",
+    "tailwindcss": "^3.3.0",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5"
   }
 }
